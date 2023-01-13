@@ -5,24 +5,19 @@
     }
   },
   "NetworkTables": {
+    "Persistent Values": {
+      "open": false
+    },
     "transitory": {
+      "FMSInfo": {
+        "open": true
+      },
+      "LiveWindow": {
+        "open": true
+      },
       "Shuffleboard": {
         "open": true
       }
-    }
-  },
-  "NetworkTables Info": {
-    "Clients": {
-      "open": true
-    },
-    "Connections": {
-      "open": true
-    },
-    "Server": {
-      "Publishers": {
-        "open": true
-      },
-      "open": true
     }
   }
 }
