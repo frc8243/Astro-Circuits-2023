@@ -29,7 +29,7 @@ public class ArcadeDrive extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        
+        System.out.println(forwardSpeed.get() + " forward " + turnSpeed.get() + " turn ");
         this.drivetrain.m_robotDrive.arcadeDrive(forwardSpeed.get(), turnSpeed.get());
 
 

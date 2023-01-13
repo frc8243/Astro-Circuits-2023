@@ -25,11 +25,10 @@ public class Drivetrain extends SubsystemBase{
     private final WPI_VictorSPX RF_motor = new WPI_VictorSPX(Constants.DriveConstants.kRightFront);
     public final DifferentialDrive m_robotDrive = new DifferentialDrive(LF_motor, RF_motor);
 
-    public static AHRS ahrs;
-    private static double currentAngle = 0;
-    private static double targetYaw = 0;
-    private static double currentYaw = 0;
-    private static double currentRoll = 0;
+    // private static double currentAngle = 0;
+    // private static double targetYaw = 0;
+    // private static double currentYaw = 0;
+    // private static double currentRoll = 0;
 
     public Drivetrain() {
 
@@ -40,8 +39,6 @@ public class Drivetrain extends SubsystemBase{
         LB_motor.follow(LF_motor);
         RB_motor.follow(RF_motor);
 
-        ahrs = new AHRS(SPI.Port.kMXP);
-
 
 
 
@@ -50,17 +47,15 @@ public class Drivetrain extends SubsystemBase{
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        currentRoll = ahrs.getRoll();
-        currentYaw = ahrs.getYaw();
-        targetYaw = -45; /* This number is in degrees : ) */
-        SmartDashboard.putNumber("Roll", currentRoll);
-        SmartDashboard.putNumber("Yaw", currentYaw);
-        if (currentYaw >= targetYaw - 5 && currentYaw <= targetYaw + 5) {
-            System.out.println("Within Target Angle");
-        }
-        else {
-            System.out.println("Outside Target Angle");
-        }
+        // targetYaw = -45; /* This number is in degrees : ) */
+        // SmartDashboard.putNumber("Roll", currentRoll);
+        // SmartDashboard.putNumber("Yaw", currentYaw);
+        // if (currentYaw >= targetYaw - 5 && currentYaw <= targetYaw + 5) {
+        //     System.out.println("Within Target Angle");
+        // }
+        // else {
+        //     System.out.println("Outside Target Angle");
+        // }
     }
     @Override
     public void simulationPeriodic() {
