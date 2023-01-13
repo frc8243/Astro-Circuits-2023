@@ -23,6 +23,7 @@ import com.ctre.phoenix.motorcontrol.StickyFaults;
  */
 public class Constants {
 
+
     public static final class DriveConstants {
        public static final int kRightFront = 0;
        public static final int kRightBack = 1;
@@ -35,29 +36,7 @@ public class Constants {
     }
 
     
-    /*
-    private final int LEFT_TRIGGER = 2;
-    private final int RIGHT_TRIGGER = 3;
-    private final int LEFT_BUMPER = 5;
-    private final int RIGHT_BUMPER = 6;
-    private final int LEFT_STICK_X = 0;
-    private final int LEFT_STICK_Y = 1;
-    private final int RIGHT_STICK_X = 4;
-    private final int RIGHT_STICK_Y = 5;
-    private final int A_BUTTON = 1;
-    private final int B_BUTTON = 2;
-    private final int X_BUTTON = 3;
-    private final int Y_BUTTON = 4;
-    private final int START_BUTTON = 8;
-    private final int BACK_BUTTON = 7;*/ 
-    
-   
-   /* public static final class JoystickConstants{
-        //for some reason, turn axis makes it go forward and back
-        public static final int kArcadeDriveSpeedAxis = 4;
-        public static final int kArcadeDriveTurnAxis = 5;
-    } 
-    */
+
     public static final class XboxConstants{
         public static final int LEFT_TRIGGER = 2;
         public static final int RIGHT_TRIGGER = 3;

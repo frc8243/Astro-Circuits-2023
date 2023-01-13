@@ -25,7 +25,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class RobotContainer {
-  AHRS ahrs = new AHRS(SPI.Port.kMXP);
+  //AHRS ahrs = new AHRS(SPI.Port.kMXP);
   private static RobotContainer m_robotContainer = new RobotContainer();
   // The robot's subsystems
   public final Drivetrain m_drivetrain = new Drivetrain();
@@ -95,7 +95,7 @@ public class RobotContainer {
     System.out.println("Camera not found");
 
   }
-  setAngle(240, ahrs.getAngle());
+  //setAngle(240, ahrs.getAngle());
   CameraServer.startAutomaticCapture();
   }
 
@@ -154,7 +154,7 @@ public class RobotContainer {
   public void enabledInit() {
   }
   public void setAngle(double targetAngle, double currentAngle){
-      currentAngle = ahrs.getAngle();
+      //currentAngle = ahrs.getAngle();
       if (currentAngle >= targetAngle - 20 && currentAngle <= targetAngle + 20){
         System.out.println("Within Target Angle");
       }
