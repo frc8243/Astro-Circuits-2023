@@ -1,9 +1,11 @@
 package frc.robot.commands;
 
+// Imports
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.Drivetrain;
+// End Imports
 
 public class Autonomous extends CommandBase {
 
@@ -20,9 +22,6 @@ public class Autonomous extends CommandBase {
         tm = time;
         m_driveTrain = subsystem;
         addRequirements(m_driveTrain);
-
-        // set command to be interuptible
-        // setInterruptible(true);
 
         timer = new Timer();
 
