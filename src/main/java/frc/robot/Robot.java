@@ -3,25 +3,42 @@ package frc.robot;
 // Imports
 import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryUtil;
+import java.io.IOException;
 import java.lang.ModuleLayer.Controller;
+import java.nio.file.Path;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.hal.HAL;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 // End Imports
 
 public class Robot extends TimedRobot {
 
     private Command m_autonomousCommand;
     private RobotContainer m_robotContainer;
-    
+    String trajectoryJSON = "pathplanner/generatedJSON/Path1.wpilib.json";
+    Trajectory trajectory = new Trajectory();
+
     @Override
     public void robotInit() {
         // This starts up the robot - Button bindings and imports Autonomous code
         m_robotContainer = RobotContainer.getInstance();
         HAL.report(tResourceType.kResourceType_Framework, tInstances.kFramework_RobotBuilder);
+
+        // Path Planner whatever :)
+        try {
+            Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+            trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+         } catch (IOException ex) {
+            DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+         }
     }
 
     /**
