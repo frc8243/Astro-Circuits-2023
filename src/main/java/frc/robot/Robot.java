@@ -8,6 +8,10 @@ import edu.wpi.first.math.trajectory.TrajectoryUtil;
 import java.io.IOException;
 import java.lang.ModuleLayer.Controller;
 import java.nio.file.Path;
+
+import com.pathplanner.lib.*;
+import com.pathplanner.lib.server.PathPlannerServer;
+
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -23,6 +27,8 @@ public class Robot extends TimedRobot {
 
     private Command m_autonomousCommand;
     private RobotContainer m_robotContainer;
+
+    //Path Planner things :(
     String trajectoryJSON = "pathplanner/generatedJSON/Path1.wpilib.json";
     Trajectory trajectory = new Trajectory();
 
@@ -31,8 +37,10 @@ public class Robot extends TimedRobot {
         // This starts up the robot - Button bindings and imports Autonomous code
         m_robotContainer = RobotContainer.getInstance();
         HAL.report(tResourceType.kResourceType_Framework, tInstances.kFramework_RobotBuilder);
+  // =----------[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[00000000000000000000]]';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;']]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]    PathPlannerTrajectory examplePath = PathPlanner.loadPath("Example Path", new PathConstrains(4, 3));
+        PathPlannerServer.startServer(5811); // 5811 = port number. adjust this according to your needs
 
-        // Path Planner whatever :)
+        // More Path Planner whatever :)
         try {
             Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
             trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
