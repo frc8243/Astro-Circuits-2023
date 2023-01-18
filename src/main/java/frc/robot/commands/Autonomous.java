@@ -14,6 +14,7 @@ public class Autonomous extends CommandBase {
     Timer timer;
     double sp;
     double tm;
+    double speed_divider;
     Drivetrain m_driveTrain;
 
     public Autonomous(double speed, double time, Drivetrain subsystem) {
