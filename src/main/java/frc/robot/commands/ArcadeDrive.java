@@ -27,7 +27,7 @@ public class ArcadeDrive extends CommandBase {
     @Override
     public void execute() {
         System.out.println(forwardSpeed.get() + " forward " + turnSpeed.get() + " turn ");
-        this.drivetrain.m_robotDrive.arcadeDrive(forwardSpeed.get(), turnSpeed.get());
+        this.drivetrain.m_robotDrive.arcadeDrive(forwardSpeed.get() / 10.0, turnSpeed.get() / 10.0);
 
     }
 
