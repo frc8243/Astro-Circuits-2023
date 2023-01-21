@@ -3,6 +3,8 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.StickyFaults;
 //End Imports
 
+import edu.wpi.first.math.util.Units;
+
 public class Constants {
     
     // Assigns IDs to Motors
@@ -30,5 +32,17 @@ public class Constants {
         public static final int Y_BUTTON = 4;
         public static final int START_BUTTON = 8;
         public static final int BACK_BUTTON = 7;
+    }
+    //Assigns PID Values to P and D variables for various tasks
+    public static final class PIDConstants {
+        public static final double LINEAR_P = 0.1;
+        public static final double LINEAR_D = 0.0;
+        public static final double ANGULAR_P = 0.1;
+        public static final double ANGULAR_D = 0.0;
+    }
+    // Assigns various values pertaining to vision related commands and subsystems
+    public static final class VisionConstants {
+        public static final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(12.5);
+
     }
 }
