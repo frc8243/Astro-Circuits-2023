@@ -16,6 +16,14 @@ public class Constants {
         public static final int kLeftBack = 3;
         public static final double SLOW_SPEED_FRACTION = 0.3;
     }
+    public static final class ArmConstants{
+        public static final int kArm = 4;
+        public static final int maxSpeed = 1;
+        public static final double ARM_SPEED_UP = .3;
+        public static final double ARM_SPEED_DOWN = .3;
+
+
+    }
 
     // Assigns IDs to buttons on Xbox Controller
     public static final class XboxConstants {

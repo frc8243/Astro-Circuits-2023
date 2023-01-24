@@ -30,6 +30,7 @@ public class RobotContainer {
   // The robot's subsystems
 
   public final Drivetrain m_drivetrain = new Drivetrain();
+  public final Arm m_Arm = new Arm();
   
   // Declaring Controller
 
