@@ -44,6 +44,9 @@ public class Constants {
     // Assigns various values pertaining to vision related commands and subsystems
     public static final class VisionConstants {
         public static final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(12.5); // Height of LimeLight Camera on Robot
+        public static final double TARGET_HEIGHT_METERS = Units.feetToMeters(2.08); // Height of target
+        public static final double GOAL_RANGE_METERS = Units.feetToMeters(1);
+        public static final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(0);
 
     }
 }
