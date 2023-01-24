@@ -43,9 +43,8 @@ public class ArcadeDrive extends CommandBase {
 
     }
 
-    public void slowMode() {
-        System.out.println(forwardSpeed.get() + " forward " + turnSpeed.get() + " turn ");
-        this.drivetrain.m_robotDrive.arcadeDrive(forwardSpeed.get() / 10.0, turnSpeed.get() / 10.0);
+    public static void slowMode() {
+        isSlow = false;
 
     }
 
