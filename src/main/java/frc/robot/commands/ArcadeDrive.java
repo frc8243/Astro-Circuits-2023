@@ -43,10 +43,6 @@ public class ArcadeDrive extends CommandBase {
 
     }
 
-    public static void slowMode() {
-        isSlow = false;
-
-    }
 
 
     @Override

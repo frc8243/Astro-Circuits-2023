@@ -84,7 +84,7 @@ public class RobotContainer {
     // Autonomous(.30, 5, m_drivetrain));
     
     //fix slow mode off a button
-    //new JoystickButton(xboxController1, 4).onTrue(new InstantCommand(ArcadeDrive.slowMode())); 
+    new JoystickButton(xboxController1,XboxConstants.Y_BUTTON).onTrue(new InstantCommand(() -> ArcadeDrive.isSlow = !ArcadeDrive.isSlow)); 
   }
 
  

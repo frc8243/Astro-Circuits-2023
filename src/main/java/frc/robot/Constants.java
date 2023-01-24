@@ -14,7 +14,7 @@ public class Constants {
         public static final int kRightBack = 1;
         public static final int kLeftFront = 2;
         public static final int kLeftBack = 3;
-        public static final double SLOW_SPEED_FRACTION = 1;
+        public static final double SLOW_SPEED_FRACTION = 0.3;
     }
 
     // Assigns IDs to buttons on Xbox Controller
