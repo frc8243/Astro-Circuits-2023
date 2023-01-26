@@ -9,30 +9,32 @@ import frc.robot.subsystems.Drivetrain;
 
 // End Imports
 
-public class TurnToTarget extends CommandBase {
+public class MoveToTarget extends CommandBase {
     PhotonCamera camera = new PhotonCamera("OV5647");
-    double turnSpeed;
-    PIDController turnController;
+    double forwardSpeed;
+    PIDController moveController;
+    double distanceToTarget;
     private final Drivetrain drivetrain;
 
-    public TurnToTarget(Drivetrain drivetrain) {
+    public MoveToTarget(Drivetrain drivetrain, double distanceToTarget) {
         this.drivetrain = drivetrain;
+        this.distanceToTarget = distanceToTarget;
         addRequirements(drivetrain);
-    }
+    } 
 
     @Override
     public void initialize() {
-        turnController = new PIDController(PIDConstants.ANGULAR_P, 0, PIDConstants.ANGULAR_D);
+        moveController = new PIDController(PIDConstants.LINEAR_P, 0, PIDConstants.LINEAR_D);
     }
 
     public void execute() {
         var result = camera.getLatestResult();
         if (result.hasTargets()) {
-            turnSpeed = -turnController.calculate(result.getBestTarget().getYaw(), 0);
+            forwardSpeed = moveController.calculate(result.getBestTarget().getBestCameraToTarget().getY(), distanceToTarget);
         } else {
-            turnSpeed = 0;
+            forwardSpeed = 0;
         }
-        this.drivetrain.m_robotDrive.arcadeDrive(0, turnSpeed);
+        this.drivetrain.m_robotDrive.arcadeDrive(forwardSpeed,0);
     }
 
     public void end(boolean interrupted) {
