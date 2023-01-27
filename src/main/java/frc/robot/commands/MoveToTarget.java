@@ -10,7 +10,7 @@ import frc.robot.subsystems.Drivetrain;
 // End Imports
 
 public class MoveToTarget extends CommandBase {
-    PhotonCamera camera = new PhotonCamera("OV5647");
+    PhotonCamera camera = new PhotonCamera("LIMELIGHT");
     double forwardSpeed;
     PIDController moveController;
     double distanceToTarget;

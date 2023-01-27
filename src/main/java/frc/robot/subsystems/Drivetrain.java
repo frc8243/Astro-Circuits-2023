@@ -44,7 +44,7 @@ public class Drivetrain extends SubsystemBase {
 
     public void setMotors(double leftSpeed, double rightSpeed) {
         LF_motor.set(leftSpeed);
-        RF_motor.set(-rightSpeed);
+        RF_motor.set(rightSpeed);
     }
 
 }

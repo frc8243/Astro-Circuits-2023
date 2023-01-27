@@ -10,7 +10,7 @@ import frc.robot.subsystems.Drivetrain;
 // End Imports
 
 public class TurnToTarget extends CommandBase {
-    PhotonCamera camera = new PhotonCamera("OV5647");
+    PhotonCamera camera = new PhotonCamera("LIMELIGHT");
     double turnSpeed;
     PIDController turnController;
     private final Drivetrain drivetrain;
@@ -28,7 +28,7 @@ public class TurnToTarget extends CommandBase {
     public void execute() {
         var result = camera.getLatestResult();
         if (result.hasTargets()) {
-            turnSpeed = -turnController.calculate(result.getBestTarget().getYaw(), 0);
+            turnSpeed = turnController.calculate(result.getBestTarget().getYaw(), 0);
         } else {
             turnSpeed = 0;
         }
