@@ -31,7 +31,7 @@ public class ArcadeDrive extends CommandBase {
     // Called
     @Override
     public void execute() {
-        System.out.println(forwardSpeed.get() + " forward " + turnSpeed.get() + " turn ");
+        // System.out.println(forwardSpeed.get() + " forward " + turnSpeed.get() + " turn ");
   
 
         if(isSlow){

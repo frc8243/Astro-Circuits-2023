@@ -38,8 +38,9 @@ public class Constants {
     public static final class PIDConstants {
         public static final double LINEAR_P = -0.1;
         public static final double LINEAR_D = 0.0;
-        public static final double ANGULAR_P = 0.02;
-        public static final double ANGULAR_D = 0.0;
+        public static final double ANGULAR_P = 0.035;
+        public static final double ANGULAR_I = 0;
+        public static final double ANGULAR_D = 0.01;
     }
     // Assigns various values pertaining to vision related commands and subsystems
     public static final class VisionConstants {
