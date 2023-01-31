@@ -1,11 +1,15 @@
 package frc.robot.commands;
 
+import java.io.Console;
+
 import org.photonvision.PhotonCamera;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.Drivetrain;
+import edu.wpi.first.math.util.Units;
+
 
 // End Imports
 
@@ -30,7 +34,10 @@ public class MoveToTarget extends CommandBase {
     public void execute() {
         var result = camera.getLatestResult();
         if (result.hasTargets()) {
-            forwardSpeed = moveController.calculate(result.getBestTarget().getBestCameraToTarget().getY(), distanceToTarget);
+            System.out.println("Distance to target = " + distanceToTarget);
+            
+            forwardSpeed = moveController.calculate(result.getBestTarget().getBestCameraToTarget().getX(), distanceToTarget);
+            System.out.println("forawrd speed = " + forwardSpeed);
         } else {
             forwardSpeed = 0;
         }
