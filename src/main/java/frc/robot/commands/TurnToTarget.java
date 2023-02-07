@@ -31,7 +31,7 @@ public class TurnToTarget extends CommandBase {
 
     @Override
     public void execute() {
-        // System.out.println(LocalTime.now()); Use this to find loop speed : )
+        // System.out.println(LocalTime.now()); Use this to find loop speed >: )
         var result = camera.getLatestResult();
         if (result.hasTargets()) {
             turnSpeed = turnController.calculate(result.getBestTarget().getYaw(), 0);

@@ -4,7 +4,11 @@ package frc.robot;
 import org.photonvision.PhotonCamera;
 
 import edu.wpi.first.wpilibj.XboxController;
-// End Imports
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -12,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-// Imports
+
 import frc.robot.Constants.XboxConstants;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.Autonomous;
@@ -23,7 +27,7 @@ import frc.robot.subsystems.Drivetrain;
 public class RobotContainer {
   private static RobotContainer m_robotContainer = new RobotContainer();
   // The robot's subsystems
-
+  AHRS ahrs;
   public final Drivetrain m_drivetrain = new Drivetrain();
   
   // Declaring Controller
@@ -33,10 +37,18 @@ public class RobotContainer {
   // Autonomous Position Chooser
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
+
+
   private RobotContainer() {
     // Smartdashboard Subsystemsnull, nul
     SmartDashboard.putData(m_drivetrain);
   
+    try {
+      ahrs = new AHRS(SPI.Port.kMXP);
+    } catch (RuntimeException ex ) {
+      DriverStation.reportError("Error instantiating navX-MXP: " + ex.getMessage(), true);
+    }
+
     configureButtonBindings();
   
     // Driving Controls
@@ -54,6 +66,7 @@ public class RobotContainer {
     
     SmartDashboard.putData("Auton", m_chooser);
     
+    SmartDashboard.putBoolean("NavX Connected", ahrs.isConnected());
     // try {
     //   CameraServer.startAutomaticCapture(1);
     // } catch (Exception ex1) {
