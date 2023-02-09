@@ -79,6 +79,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     new JoystickButton(xboxController1, XboxConstants.LEFT_BUMPER).onTrue(new TurnToTarget(m_drivetrain));
     new JoystickButton(xboxController1, XboxConstants.RIGHT_BUMPER).onTrue(new MoveToTarget(m_drivetrain,1));
+    new JoystickButton(xboxController1, XboxConstants.A_BUTTON).onTrue(new AutoBalance(m_drivetrain));
 
     // XboxController()
 
