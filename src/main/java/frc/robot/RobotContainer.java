@@ -27,7 +27,7 @@ import frc.robot.subsystems.Drivetrain;
 public class RobotContainer {
   private static RobotContainer m_robotContainer = new RobotContainer();
   // The robot's subsystems
-  AHRS ahrs;
+  public static AHRS ahrs;
   public final Drivetrain m_drivetrain = new Drivetrain();
   
   // Declaring Controller
@@ -42,13 +42,7 @@ public class RobotContainer {
   private RobotContainer() {
     // Smartdashboard Subsystemsnull, nul
     SmartDashboard.putData(m_drivetrain);
-  
-    try {
-      ahrs = new AHRS(SPI.Port.kMXP);
-    } catch (RuntimeException ex ) {
-      DriverStation.reportError("Error instantiating navX-MXP: " + ex.getMessage(), true);
-    }
-
+    ahrs = new AHRS(SPI.Port.kMXP);
     configureButtonBindings();
   
     // Driving Controls
@@ -66,7 +60,7 @@ public class RobotContainer {
     
     SmartDashboard.putData("Auton", m_chooser);
     
-    SmartDashboard.putBoolean("NavX Connected", ahrs.isConnected());
+    
     // try {
     //   CameraServer.startAutomaticCapture(1);
     // } catch (Exception ex1) {

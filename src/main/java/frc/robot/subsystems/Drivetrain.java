@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 // End Imports
 
 public class Drivetrain extends SubsystemBase {
@@ -33,7 +34,8 @@ public class Drivetrain extends SubsystemBase {
 
     @Override
     public void periodic() {
-
+        SmartDashboard.putBoolean("NavX Connected", RobotContainer.ahrs.isConnected());
+        SmartDashboard.putNumber("NavX Yaw", RobotContainer.ahrs.getYaw());
     }
 
     @Override
