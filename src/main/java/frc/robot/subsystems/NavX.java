@@ -22,6 +22,7 @@ public class NavX extends SubsystemBase {
         SmartDashboard.putNumber("NavX Yaw", ahrs.getYaw());
         SmartDashboard.putNumber("NavX Pitch", ahrs.getPitch());
         SmartDashboard.putNumber("NavX Roll", ahrs.getRoll());
+        // System.out.println("NavX : )");
     }
 
     @Override
