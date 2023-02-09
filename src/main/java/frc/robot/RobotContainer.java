@@ -23,11 +23,13 @@ import frc.robot.commands.Autonomous;
 import frc.robot.commands.MoveToTarget;
 import frc.robot.commands.TurnToTarget;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.NavX;
 
 public class RobotContainer {
   private static RobotContainer m_robotContainer = new RobotContainer();
   // The robot's subsystems
   public final Drivetrain m_drivetrain = new Drivetrain();
+  public final NavX m_navx = new NavX();
   
   // Declaring Controller
 
