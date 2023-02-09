@@ -27,7 +27,6 @@ import frc.robot.subsystems.Drivetrain;
 public class RobotContainer {
   private static RobotContainer m_robotContainer = new RobotContainer();
   // The robot's subsystems
-  public static AHRS ahrs;
   public final Drivetrain m_drivetrain = new Drivetrain();
   
   // Declaring Controller
@@ -42,7 +41,6 @@ public class RobotContainer {
   private RobotContainer() {
     // Smartdashboard Subsystemsnull, nul
     SmartDashboard.putData(m_drivetrain);
-    ahrs = new AHRS(SPI.Port.kMXP);
     configureButtonBindings();
   
     // Driving Controls

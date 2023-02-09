@@ -23,7 +23,7 @@ public class Drivetrain extends SubsystemBase {
 
     public Drivetrain() {
 
-        LF_motor.setInverted(false);`
+        LF_motor.setInverted(false);
         LB_motor.setInverted(false);
         RF_motor.setInverted(true);
         RB_motor.setInverted(true);
@@ -34,9 +34,7 @@ public class Drivetrain extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putBoolean("NavX Connected", RobotContainer.ahrs.isConnected());
-        SmartDashboard.putNumber("NavX Yaw", RobotContainer.ahrs.getYaw());
-        SmartDashboard.putNumber("NavX Pitch", RobotContainer.ahrs.getPitch());
+    
     }
 
     @Override
