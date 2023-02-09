@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.Constants.XboxConstants;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.AutoBalance;
 import frc.robot.commands.Autonomous;
 import frc.robot.commands.MoveToTarget;
 import frc.robot.commands.TurnToTarget;
