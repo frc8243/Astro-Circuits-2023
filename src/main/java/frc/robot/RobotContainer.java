@@ -49,8 +49,8 @@ public class RobotContainer {
     // Driving Controls
     m_drivetrain.setDefaultCommand(new ArcadeDrive(m_drivetrain,
       //Add a minus ( - ) to either of these to invert the direction the stick has to be pushed : ) - Julien
-        () -> xboxController1.getRawAxis(XboxConstants.RIGHT_STICK_X),
-        () -> xboxController1.getRawAxis(XboxConstants.LEFT_STICK_Y)
+        () -> -xboxController1.getRawAxis(XboxConstants.LEFT_STICK_Y),
+        () -> -xboxController1.getRawAxis(XboxConstants.RIGHT_STICK_X)
         ));
 
   
