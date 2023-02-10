@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.NavX;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.Constants.BalanceConstants;;
 
@@ -33,6 +34,7 @@ public class AutoBalance extends CommandBase {
   @Override
   public void execute() {
     speed = BalanceConstants.kP * NavX.ahrs.getRoll();
+    SmartDashboard.putNumber("AutoBalance Speed", speed);
     this.drivetrain.m_robotDrive.arcadeDrive(speed, 0); 
   }
     
@@ -43,6 +45,6 @@ public class AutoBalance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(NavX.ahrs.getRoll()) <= 3.5;
+    return Math.abs(NavX.ahrs.getRoll()) <= 3.75;
   }
 }

@@ -51,6 +51,6 @@ public class Constants {
     }
 
     public static final class BalanceConstants {
-        public static final double kP = 1/40;
+        public static final double kP = 1/15.;
     }
 }
