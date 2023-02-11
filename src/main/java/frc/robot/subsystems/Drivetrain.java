@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 // Imports
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
@@ -29,12 +30,18 @@ public class Drivetrain extends SubsystemBase {
         RB_motor.setInverted(true);
         LB_motor.follow(LF_motor);
         RB_motor.follow(RF_motor);
+        LF_motor.setNeutralMode(NeutralMode.Brake);
+        LB_motor.setNeutralMode(NeutralMode.Brake);
+        RF_motor.setNeutralMode(NeutralMode.Brake);
+        RB_motor.setNeutralMode(NeutralMode.Brake);
 
     }
 
     @Override
     public void periodic() {
-    
+        SmartDashboard.putNumber("leftSpeed", LB_motor.getMotorOutputPercent());
+        SmartDashboard.putNumber("rightSpeed", RB_motor.getMotorOutputPercent());
+        // System.out.println("in periodic");
     }
 
     @Override
@@ -46,6 +53,8 @@ public class Drivetrain extends SubsystemBase {
     public void setMotors(double leftSpeed, double rightSpeed) {
         LF_motor.set(leftSpeed);
         RF_motor.set(rightSpeed);
+        
+
     }
 
 }

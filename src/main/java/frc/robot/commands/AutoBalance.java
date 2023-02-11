@@ -34,17 +34,27 @@ public class AutoBalance extends CommandBase {
   @Override
   public void execute() {
     speed = BalanceConstants.kP * NavX.ahrs.getRoll();
-    SmartDashboard.putNumber("AutoBalance Speed", speed);
-    this.drivetrain.m_robotDrive.arcadeDrive(speed, 0); 
+    if (speed < 0) {
+      speed *= BalanceConstants.REVERSE_POWER_MULTIPLIER;
+    }
+    if (Math.abs(speed) > 0.4) {
+      speed = Math.copySign(0.4, speed);
+    }
+    // SmartDashboard.putNumber("AutoBalance Speed", speed);
+    this.drivetrain.setMotors(speed,speed);
+    // this.drivetrain.m_robotDrive.arcadeDrive(speed, 0); 
   }
     
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    this.drivetrain.setMotors(0, 0);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(NavX.ahrs.getRoll()) <= 3.75;
+    //return Math.abs(NavX.ahrs.getRoll()) <= 3.75;
+    return false;
   }
 }
