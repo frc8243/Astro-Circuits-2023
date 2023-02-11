@@ -60,7 +60,7 @@ public class RobotContainer {
         m_chooser.addOption("position1", position1);
 
     CommandBase balanceTesting = new SequentialCommandGroup(
-      new Autonomous(0.5, 5, m_drivetrain),
+      new Autonomous(0.5, 1.5, m_drivetrain),
       new AutoBalance(m_drivetrain));
       m_chooser.addOption("balanceTesting", balanceTesting);
 
