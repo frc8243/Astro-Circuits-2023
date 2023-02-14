@@ -6,9 +6,16 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 public class Arm extends SubsystemBase {
+  
+  private CANSparkMax armMotor = new CANSparkMax(4, MotorType.kBrushless);
   /** Creates a new Arm. */
-  public Arm() {}
+  public Arm() {
+
+  }
 
   @Override
   public void periodic() {
