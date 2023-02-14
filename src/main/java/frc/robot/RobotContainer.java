@@ -23,14 +23,21 @@ import frc.robot.commands.AutoBalance;
 import frc.robot.commands.Autonomous;
 import frc.robot.commands.MoveToTarget;
 import frc.robot.commands.TurnToTarget;
+import frc.robot.commands.SqueezyReleasy;
+import frc.robot.commands.ArmMovement;
+
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.NavX;
+import frc.robot.subsystems.Claw;
+import frc.robot.subsystems.Arm;
 
 public class RobotContainer {
   private static RobotContainer m_robotContainer = new RobotContainer();
   // The robot's subsystems
   public final Drivetrain m_drivetrain = new Drivetrain();
   public final NavX m_navx = new NavX();
+  public final Claw m_claw = new Claw();
+  public final Arm m_arm = new Arm();
   
   // Declaring Controller
 
@@ -86,6 +93,7 @@ public class RobotContainer {
     new JoystickButton(xboxController1, XboxConstants.LEFT_BUMPER).onTrue(new TurnToTarget(m_drivetrain));
     new JoystickButton(xboxController1, XboxConstants.RIGHT_BUMPER).onTrue(new MoveToTarget(m_drivetrain,1));
     new JoystickButton(xboxController1, XboxConstants.A_BUTTON).onTrue(new AutoBalance(m_drivetrain));
+    new JoystickButton(xboxController1, XboxConstants.X_BUTTON).onTrue(new SqueezyReleasy(m_claw, .5));
 
     // XboxController()
 
