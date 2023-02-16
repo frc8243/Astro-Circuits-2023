@@ -29,11 +29,14 @@ public class SqueezyReleasy extends CommandBase {
   @Override
   public void execute() {
     this.claw.setMotor(power);
+    System.out.println("Claw motor power : " + power);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    this.claw.setMotor(0);
+  }
 
   // Returns true when the command should end.
   @Override

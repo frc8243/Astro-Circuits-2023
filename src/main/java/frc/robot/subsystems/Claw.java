@@ -17,10 +17,9 @@ public class Claw extends SubsystemBase {
   private CANSparkMax clawMotor = new CANSparkMax(12, MotorType.kBrushed);
   /** Creates a new Claw. */
   public Claw() {
-    filter = new SlewRateLimiter(1, -1, 0);
   }
+
   public void setMotor(double power){
-    power = filter.calculate(power);
     clawMotor.set(power);
 
   }
@@ -28,5 +27,10 @@ public class Claw extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+
   }
+
+
+
 }
+
