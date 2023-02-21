@@ -54,8 +54,8 @@ public class Constants {
     public static final class ArmConstants{
         public static final double kP = 0.1;
         public static final int kArmMotor = 14;
-        public static final double kGVolts = 2;
-        public static final double kSVolts = 1;
+        public static final double kGVolts = 5;
+        public static final double kSVolts = 2;
         public static final double kVVoltSecondPerRad = 1;
         public static final double kAVoltSecondSquaredPerRad = 1;
         public static final double kMaxVelocityRadPerSecond = 2; 
