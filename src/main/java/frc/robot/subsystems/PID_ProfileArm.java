@@ -71,24 +71,6 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
     }
   }
 
-    @Override
-    public void simulationPeriodic() {
-      // sets input for elevator motor in simulation
-      armSim.setInput(armMotor.get() * RobotController.getBatteryVoltage());
-      
-      // Next, we update it. The standard loop time is 20ms.
-      armSim.update(0.02);
-      // Finally, we set our simulated encoder's readings
-      armEncoderSim.setDistance(armSim.getAngleRads());
-      // sets our simulated encoder speeds
-      armEncoderSim.setSpeed(armSim.getVelocityRadPerSec());
-  
-      SmartDashboard.putNumber("voltage", RobotController.getBatteryVoltage());
-      SmartDashboard.putNumber("arm angle", armSim.getAngleRads()); 
-      SmartDashboard.putNumber("armMotor", armMotor.get());
-      // SimBattery estimates loaded battery voltages
-      RoboRioSim.setVInVoltage(BatterySim.calculateDefaultBatteryLoadedVoltage(armSim.getCurrentDrawAmps()));
-      RobotContainer.armMechanism.setAngle(Units.radiansToDegrees(armSim.getAngleRads()));
   @Override
   public void simulationPeriodic() {
     // sets input for elevator motor in simulation
