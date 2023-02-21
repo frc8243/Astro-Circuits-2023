@@ -78,6 +78,7 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
       // sets our simulated encoder speeds
       armEncoderSim.setSpeed(armSim.getVelocityRadPerSec());
   
+      SmartDashboard.putNumber("voltage", RobotController.getBatteryVoltage());
       SmartDashboard.putNumber("arm angle", armSim.getAngleRads()); 
       SmartDashboard.putNumber("armMotor", armMotor.get());
       // SimBattery estimates loaded battery voltages
