@@ -1,22 +1,18 @@
 package frc.robot;
 
+import java.io.IOException;
+import java.nio.file.Path;
+
+import com.pathplanner.lib.server.PathPlannerServer;
+
 // Imports
 import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
+import edu.wpi.first.hal.HAL;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
-import java.io.IOException;
-import java.lang.ModuleLayer.Controller;
-import java.nio.file.Path;
-
-import com.pathplanner.lib.*;
-import com.pathplanner.lib.server.PathPlannerServer;
-
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.hal.HAL;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;

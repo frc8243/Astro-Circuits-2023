@@ -1,11 +1,7 @@
 package frc.robot;
 //Imports
-import com.ctre.phoenix.motorcontrol.StickyFaults;
-
-//End Imports
-
 import edu.wpi.first.math.util.Units;
-
+//EndImports
 public class Constants {
     
     // Assigns IDs to Motors
@@ -53,5 +49,28 @@ public class Constants {
     public static final class BalanceConstants {
         public static final double kP = 1/75.;
         public static final double REVERSE_POWER_MULTIPLIER = 1.5;
+    }
+
+    public static final class ArmConstants{
+        public static final double kP = 0.1;
+        public static final int kArmMotor = 14;
+        public static final double kGVolts = 2;
+        public static final double kSVolts = 1;
+        public static final double kVVoltSecondPerRad = 1;
+        public static final double kAVoltSecondSquaredPerRad = 1;
+        public static final double kMaxVelocityRadPerSecond = 2; 
+        public static final double kMaxAccelerationRadPerSecSquared = 2;
+        public static final double kEncoderDistancePerPulse = 1;
+        public static final double kRotationDegree = 360.0/64.0;
+        public static final double kGearRatio = 64;
+        public static final double kArmOffsetRads = 0;
+        public static final double kArmLength = Units.inchesToMeters(30);
+        public static final double kArmMass = Units.lbsToKilograms(10);
+        public static final double kArmMinAngle = Units.degreesToRadians(0); //TODO floor angle
+        public static final double kArmMaxAngle = Units.degreesToRadians(270);
+
+
+
+
     }
 }

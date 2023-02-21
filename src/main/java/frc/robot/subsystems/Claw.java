@@ -4,12 +4,11 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
-import edu.wpi.first.wpilibj.CAN;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Claw extends SubsystemBase {
   SlewRateLimiter filter;
@@ -17,6 +16,8 @@ public class Claw extends SubsystemBase {
   private CANSparkMax clawMotor = new CANSparkMax(12, MotorType.kBrushed);
   /** Creates a new Claw. */
   public Claw() {
+    clawMotor.restoreFactoryDefaults();
+    clawMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
   }
 
   public void setMotor(double power){

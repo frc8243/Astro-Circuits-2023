@@ -5,11 +5,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.NavX;
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants.BalanceConstants;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.Constants.BalanceConstants;;
+import frc.robot.subsystems.NavX;;
 
 
 public class AutoBalance extends CommandBase {
