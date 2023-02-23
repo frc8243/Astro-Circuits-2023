@@ -21,13 +21,13 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutoBalance;
 import frc.robot.commands.Autonomous;
 import frc.robot.commands.MoveToTarget;
+import frc.robot.commands.SimpleArmMovement;
 import frc.robot.commands.SqueezyReleasy;
 import frc.robot.commands.TurnToTarget;
-import frc.robot.commands.doNothingArm;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.NavX;
-import frc.robot.subsystems.PID_ProfileArm;
 
 public class RobotContainer {
   private static RobotContainer m_robotContainer = new RobotContainer();
@@ -35,7 +35,7 @@ public class RobotContainer {
   public final Drivetrain m_drivetrain = new Drivetrain();
   public final NavX m_navx = new NavX();
   public final Claw m_claw = new Claw();
-  public final PID_ProfileArm m_arm = new PID_ProfileArm();
+  public final Arm m_arm = new Arm();
 
   public static MechanismLigament2d armMechanism;
   
@@ -63,7 +63,7 @@ public class RobotContainer {
         () -> -xboxController1.getRawAxis(XboxConstants.RIGHT_STICK_X)
         ));
 
-    m_arm.setDefaultCommand(new doNothingArm(m_arm));
+    
 
     CommandBase position1 = new SequentialCommandGroup(
         new Autonomous(-0.25, 4, m_drivetrain),
@@ -104,24 +104,8 @@ public class RobotContainer {
     new JoystickButton(xboxController1, XboxConstants.A_BUTTON).onTrue(new AutoBalance(m_drivetrain));
     new JoystickButton(xboxController1, XboxConstants.X_BUTTON).whileTrue(new SqueezyReleasy(m_claw, .9));
     new JoystickButton(xboxController1, XboxConstants.B_BUTTON).whileTrue(new SqueezyReleasy(m_claw, -.9));
-    new JoystickButton(xboxController1, XboxConstants.Y_BUTTON).onTrue(
-        Commands.runOnce(
-            () -> {
-              m_arm.setGoal(2);
-              m_arm.enable();
-              System.out.println("Y Pressed");
-            },
-            m_arm));
-            
-
-    new JoystickButton(xboxController1, XboxConstants.START_BUTTON).onTrue(
-      Commands.runOnce(
-        () -> {
-          m_arm.setGoal(4);
-          m_arm.enable();
-          System.out.println("Start Pressed");
-        },
-        m_arm));  
+    new JoystickButton(xboxController1, XboxConstants.START_BUTTON).onTrue(new SimpleArmMovement(m_arm, .3).withTimeout(2));
+    new JoystickButton(xboxController1, XboxConstants.BACK_BUTTON).onTrue(new SimpleArmMovement(m_arm, -.3).withTimeout(2));
     //fix slow mode off a button
     new JoystickButton(xboxController1,XboxConstants.Y_BUTTON).onTrue(new InstantCommand(() -> ArcadeDrive.isSlow = !ArcadeDrive.isSlow)); 
   }

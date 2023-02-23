@@ -5,26 +5,40 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.PID_ProfileArm;
+import frc.robot.subsystems.Arm;
 
-public class doNothingArm extends CommandBase {
-  /** Creates a new doNothingArm. */
-  public doNothingArm(PID_ProfileArm arm) {
-    addRequirements(arm);
+public class SimpleArmMovement extends CommandBase {
+  private final Arm armSubsystem;
+  private final double power;
+  
+
+  /** Creates a new SimpleArmMovement. */
+  public SimpleArmMovement(Arm armSubsystem, double power) {
+    this.armSubsystem = armSubsystem;
+    this.power = power;
+    addRequirements(armSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    this.armSubsystem.setMotor(power);
+    System.out.println("Arm is moving at > " + power);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    System.out.println("Arm is stopped");
+    this.armSubsystem.setMotor(Math.copySign(0.025, power));
+  }
 
   // Returns true when the command should end.
   @Override
