@@ -32,6 +32,7 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
 
   private SimEncoder armEncoderSim;
   private SingleJointedArmSim armSim;
+  private double speed = 0;
 
   /** Create a new ArmSubsystem. */
 
@@ -74,7 +75,8 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
   @Override
   public void simulationPeriodic() {
     // sets input for elevator motor in simulation
-    armSim.setInput(armMotor.get() * RobotController.getBatteryVoltage());
+    // System.out.println("Arm Sim is Live");
+    armSim.setInput(speed * RobotController.getBatteryVoltage());
 
     // Next, we update it. The standard loop time is 20ms.
     armSim.update(0.02);
@@ -84,31 +86,44 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
     armEncoderSim.setSpeed(armSim.getVelocityRadPerSec());
 
     SmartDashboard.putNumber("arm angle", armSim.getAngleRads());
+    SmartDashboard.putNumber("goal", m_controller.getGoal().position);
+    SmartDashboard.putNumber("armVoltage", speed * RobotController.getBatteryVoltage());
     SmartDashboard.putNumber("armMotor", armMotor.get());
+    SmartDashboard.putNumber("speed",speed);
     // SimBattery estimates loaded battery voltages
     RoboRioSim.setVInVoltage(BatterySim.calculateDefaultBatteryLoadedVoltage(armSim.getCurrentDrawAmps()));
-    RobotContainer.armMechanism.setAngle(Units.radiansToDegrees(armSim.getAngleRads()));
+    RobotContainer.armMechanism.setAngle(Units.radiansToDegrees(armSim.getAngleRads()+ArmConstants.kArmOffsetInDegrees));
 
   }
 
   @Override
   public void periodic() {
-
+    super.periodic();
+    // System.out.println("Non-Sim Arm System is live!");
   }
 
   @Override
   public void useOutput(double output, TrapezoidProfile.State setpoint) {
     // Calculate the feedforward from the sepoint
-    double feedforward = m_feedforward.calculate(setpoint.position, setpoint.velocity);
+    // double feedforward = m_feedforward.calculate(setpoint.position, setpoint.velocity);
+    
+
+    
     // Add the feedforward to the PID output to get the motor output
-    armMotor.setVoltage(output + feedforward);
-    System.out.println("useOutput has been called" + output + "< output" + feedforward + "< feed forward");
+    speed = output + ArmConstants.kFeedForward * setpoint.velocity;
+    if (RobotBase.isSimulation()) {
+      armSim.setInputVoltage(speed);
+    }
+    else {
+      armMotor.setVoltage(speed);
+    }
+    System.out.println("useOutput has been called  " + output + " <- output   " + speed + " <- speed");
   }
 
   @Override
   public double getMeasurement() {
     System.out.println("getMeasure has been called" + m_encoder.getPosition());
-    return m_encoder.getPosition();
+    return armEncoderSim.getDistance();
 
   }
 }

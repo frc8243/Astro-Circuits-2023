@@ -52,9 +52,9 @@ public class Constants {
     }
 
     public static final class ArmConstants{
-        public static final double kP = 0.1;
+        public static final double kP = 0.8;
         public static final int kArmMotor = 14;
-        public static final double kGVolts = 5;
+        public static final double kGVolts = 0.133;
         public static final double kSVolts = 2;
         public static final double kVVoltSecondPerRad = 1;
         public static final double kAVoltSecondSquaredPerRad = 1;
@@ -67,7 +67,11 @@ public class Constants {
         public static final double kArmLength = Units.inchesToMeters(30);
         public static final double kArmMass = Units.lbsToKilograms(10);
         public static final double kArmMinAngle = Units.degreesToRadians(0); //TODO floor angle
-        public static final double kArmMaxAngle = Units.degreesToRadians(270);
+        public static final double kArmMaxAngle = Units.degreesToRadians(180);
+        public static final double kArmOffsetInDegrees = Units.degreesToRadians(60);
+        public static final double kArmLoadingLocation = Units.degreesToRadians(105);
+        public static final double kArmStraightUp = Units.degreesToRadians(60);
+        public static final double kFeedForward = 0.133;
 
 
 
