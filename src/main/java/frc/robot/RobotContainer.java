@@ -125,6 +125,15 @@ public class RobotContainer {
           System.out.println("Start Pressed");
         },
         m_arm));  
+
+    new JoystickButton(xboxController1, XboxConstants.BACK_BUTTON).onTrue(
+      Commands.runOnce(
+        () -> {
+          m_arm.setGoal(ArmConstants.kArmRestingLocation);
+          m_arm.enable();
+          System.out.println("Start Pressed");
+        },
+        m_arm));
     //fix slow mode off a button
     new JoystickButton(xboxController1,XboxConstants.Y_BUTTON).onTrue(new InstantCommand(() -> ArcadeDrive.isSlow = !ArcadeDrive.isSlow)); 
   }

@@ -70,6 +70,7 @@ public class Constants {
         public static final double kArmMaxAngle = Units.degreesToRadians(180);
         public static final double kArmOffsetInDegrees = Units.degreesToRadians(60);
         public static final double kArmLoadingLocation = Units.degreesToRadians(105);
+        public static final double kArmRestingLocation = Units.degreesToRadians(0);
         public static final double kArmStraightUp = Units.degreesToRadians(60);
         public static final double kFeedForward = 0.133;
 

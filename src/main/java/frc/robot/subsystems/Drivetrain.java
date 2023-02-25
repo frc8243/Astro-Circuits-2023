@@ -1,9 +1,15 @@
 package frc.robot.subsystems;
 
+import java.net.CacheRequest;
+
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 // Imports
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.CAN;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -11,10 +17,10 @@ import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
 
-    private final WPI_VictorSPX LB_motor = new WPI_VictorSPX(Constants.DriveConstants.kLeftBack);
-    private final WPI_VictorSPX LF_motor = new WPI_VictorSPX(Constants.DriveConstants.kLeftFront);
-    private final WPI_VictorSPX RB_motor = new WPI_VictorSPX(Constants.DriveConstants.kRightBack);
-    private final WPI_VictorSPX RF_motor = new WPI_VictorSPX(Constants.DriveConstants.kRightFront);
+    private final CANSparkMax LB_motor = new CANSparkMax(Constants.DriveConstants.kLeftBack, MotorType.kBrushed);
+    private final CANSparkMax LF_motor = new CANSparkMax(Constants.DriveConstants.kLeftFront,MotorType.kBrushed);
+    private final CANSparkMax RB_motor = new CANSparkMax(Constants.DriveConstants.kRightBack,MotorType.kBrushed);
+    private final CANSparkMax RF_motor = new CANSparkMax(Constants.DriveConstants.kRightFront,MotorType.kBrushed);
     public final DifferentialDrive m_robotDrive = new DifferentialDrive(LF_motor, RF_motor);
 
     public Drivetrain() {
@@ -25,17 +31,17 @@ public class Drivetrain extends SubsystemBase {
         RB_motor.setInverted(true);
         LB_motor.follow(LF_motor);
         RB_motor.follow(RF_motor);
-        LF_motor.setNeutralMode(NeutralMode.Brake);
-        LB_motor.setNeutralMode(NeutralMode.Brake);
-        RF_motor.setNeutralMode(NeutralMode.Brake);
-        RB_motor.setNeutralMode(NeutralMode.Brake);
+        LF_motor.setIdleMode(IdleMode.kBrake);
+        LB_motor.setIdleMode(IdleMode.kBrake);
+        RF_motor.setIdleMode(IdleMode.kBrake);
+        RB_motor.setIdleMode(IdleMode.kBrake);
 
     }
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("leftSpeed", LB_motor.getMotorOutputPercent());
-        SmartDashboard.putNumber("rightSpeed", RB_motor.getMotorOutputPercent());
+        // SmartDashboard.putNumber("leftSpeed", );
+        // SmartDashboard.putNumber("rightSpeed", RB_motor.getMotorOutputPercent());
         // System.out.println("in periodic");
     }
 

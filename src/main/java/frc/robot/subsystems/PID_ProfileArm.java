@@ -99,6 +99,22 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
   @Override
   public void periodic() {
     super.periodic();
+    armMotor.setVoltage(speed);
+
+    // Next, we update it. The standard loop time is 20ms.
+    // Finally, we set our simulated encoder's readings
+    // sets our simulated encoder speeds
+    
+
+    SmartDashboard.putNumber("arm angle", armSim.getAngleRads());
+    SmartDashboard.putNumber("goal", m_controller.getGoal().position);
+    SmartDashboard.putNumber("armVoltage", speed);
+    SmartDashboard.putNumber("armMotor", armMotor.get());
+    SmartDashboard.putNumber("speed",speed);
+
+    
+
+    
     // System.out.println("Non-Sim Arm System is live!");
   }
 

@@ -26,5 +26,5 @@
     },
   ],
   "java.test.defaultConfig": "WPIlibUnitTests",
-  "wpilib.stopSimulationOnEntry": true
+  "wpilib.stopSimulationOnEntry": false
 }
