@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Claw extends SubsystemBase {
   SlewRateLimiter filter;
 
-  private CANSparkMax clawMotor = new CANSparkMax(12, MotorType.kBrushed);
+  private CANSparkMax clawMotor = new CANSparkMax(9, MotorType.kBrushed);
   /** Creates a new Claw. */
   public Claw() {
     clawMotor.restoreFactoryDefaults();

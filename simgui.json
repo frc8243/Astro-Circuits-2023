@@ -39,6 +39,13 @@
       "/SmartDashboard/Auton": "String Chooser",
       "/SmartDashboard/Drivetrain": "Subsystem",
       "/SmartDashboard/Mech2d": "Mechanism2d"
+    },
+    "windows": {
+      "/SmartDashboard/Mech2d": {
+        "window": {
+          "visible": true
+        }
+      }
     }
   },
   "NetworkTables": {

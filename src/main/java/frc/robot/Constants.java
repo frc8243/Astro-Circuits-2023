@@ -6,10 +6,10 @@ public class Constants {
     
     // Assigns IDs to Motors
     public static final class DriveConstants {
-        public static final int kRightFront = 0;
+        public static final int kRightFront = 2;
         public static final int kRightBack = 1;
-        public static final int kLeftFront = 2;
-        public static final int kLeftBack = 3;
+        public static final int kLeftFront = 18;
+        public static final int kLeftBack = 19;
         public static final double SLOW_SPEED_FRACTION = 0.5;
     }
 
@@ -52,7 +52,9 @@ public class Constants {
     }
 
     public static final class ArmConstants{
-        public static final double kP = 0.8;
+        public static final double kP = 0.5;
+        public static final double kI = 0.0;
+        public static final double kD = 0.0;
         public static final int kArmMotor = 14;
         public static final double kGVolts = 0.133;
         public static final double kSVolts = 2;
@@ -71,6 +73,7 @@ public class Constants {
         public static final double kArmOffsetInDegrees = Units.degreesToRadians(60);
         public static final double kArmLoadingLocation = Units.degreesToRadians(105);
         public static final double kArmRestingLocation = Units.degreesToRadians(0);
+        public static final double kArmScoringLocation = Units.degreesToRadians(80);
         public static final double kArmStraightUp = Units.degreesToRadians(60);
         public static final double kFeedForward = 0.133;
 

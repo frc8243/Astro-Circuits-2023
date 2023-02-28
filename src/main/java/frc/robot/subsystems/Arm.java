@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
   /** Creates a new Arm. */
-  private CANSparkMax armMotor = new CANSparkMax(14, MotorType.kBrushless);
+  private CANSparkMax armMotor = new CANSparkMax(10, MotorType.kBrushless);
   private RelativeEncoder armEncoder = armMotor.getEncoder();
   public double target;
 

@@ -102,11 +102,11 @@ public class RobotContainer {
    * Button bindings go below
    */
   private void configureButtonBindings() {
-    new JoystickButton(xboxController1, XboxConstants.LEFT_BUMPER).onTrue(new TurnToTarget(m_drivetrain));
-    new JoystickButton(xboxController1, XboxConstants.RIGHT_BUMPER).onTrue(new MoveToTarget(m_drivetrain,1));
+   // new JoystickButton(xboxController1, XboxConstants.LEFT_BUMPER).onTrue(new TurnToTarget(m_drivetrain));
+    //new JoystickButton(xboxController1, XboxConstants.RIGHT_BUMPER).onTrue(new MoveToTarget(m_drivetrain,1));
     new JoystickButton(xboxController1, XboxConstants.A_BUTTON).onTrue(new AutoBalance(m_drivetrain));
-    new JoystickButton(xboxController1, XboxConstants.X_BUTTON).whileTrue(new SqueezyReleasy(m_claw, .9));
-    new JoystickButton(xboxController1, XboxConstants.B_BUTTON).whileTrue(new SqueezyReleasy(m_claw, -.9));
+    new JoystickButton(xboxController1, XboxConstants.RIGHT_BUMPER).whileTrue(new SqueezyReleasy(m_claw, .9));
+    new JoystickButton(xboxController1, XboxConstants.LEFT_BUMPER).whileTrue(new SqueezyReleasy(m_claw, -.9));
     new JoystickButton(xboxController1, XboxConstants.Y_BUTTON).onTrue(
         Commands.runOnce(
             () -> {
@@ -131,9 +131,20 @@ public class RobotContainer {
         () -> {
           m_arm.setGoal(ArmConstants.kArmRestingLocation);
           m_arm.enable();
-          System.out.println("Start Pressed");
+          System.out.println("Back Pressed");
         },
         m_arm));
+    new JoystickButton(xboxController1, XboxConstants.X_BUTTON).onTrue(
+      Commands.runOnce(
+        () -> {
+          m_arm.setGoal(ArmConstants.kArmScoringLocation);
+          m_arm.enable();
+          System.out.println("X Pressed");
+        },
+        m_arm));
+
+    
+    
     //fix slow mode off a button
     new JoystickButton(xboxController1,XboxConstants.Y_BUTTON).onTrue(new InstantCommand(() -> ArcadeDrive.isSlow = !ArcadeDrive.isSlow)); 
   }
