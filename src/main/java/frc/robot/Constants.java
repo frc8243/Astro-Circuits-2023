@@ -55,7 +55,7 @@ public class Constants {
         public static final double kP = 10;
         public static final double kI = 0.0;
         public static final double kD = 0.1;
-        public static final int kArmMotor = 14;
+        public static final int kArmMotor = 10;
         public static final double kGVolts = 0.133;
         public static final double kSVolts = 2;
         public static final double kVVoltSecondPerRad = 1;
