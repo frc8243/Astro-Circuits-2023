@@ -60,7 +60,7 @@ public class Constants {
         public static final double kSVolts = 2;
         public static final double kVVoltSecondPerRad = 1;
         public static final double kAVoltSecondSquaredPerRad = 1;
-        public static final double kMaxVelocityRadPerSecond = 2; 
+        public static final double kMaxVelocityRadPerSecond = 0.1; 
         public static final double kMaxAccelerationRadPerSecSquared = 2;
         public static final double kEncoderDistancePerPulse = 1;
         public static final double kRotationDegree = 360.0/64.0;

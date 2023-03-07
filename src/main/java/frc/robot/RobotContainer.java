@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.XboxConstants;
 import frc.robot.commands.ArcadeDrive;
@@ -66,7 +67,7 @@ public class RobotContainer {
         () -> -xboxController1.getRawAxis(XboxConstants.RIGHT_STICK_X)
         ));
 
-    m_arm.setDefaultCommand(new doNothingArm(m_arm));
+    // m_arm.setDefaultCommand(Commands.run(() -> { m_arm.armMotor.setVoltage(0); }));
 
     CommandBase position1 = new SequentialCommandGroup(
         new Autonomous(-0.25, 4, m_drivetrain),
@@ -107,37 +108,43 @@ public class RobotContainer {
     new JoystickButton(xboxController1, XboxConstants.A_BUTTON).onTrue(new AutoBalance(m_drivetrain));
     new JoystickButton(xboxController1, XboxConstants.RIGHT_BUMPER).whileTrue(new SqueezyReleasy(m_claw, .9));
     new JoystickButton(xboxController1, XboxConstants.LEFT_BUMPER).whileTrue(new SqueezyReleasy(m_claw, -.9));
-    new JoystickButton(xboxController1, XboxConstants.Y_BUTTON).onTrue(
+    
+    new JoystickButton(xboxController1, XboxConstants.Y_BUTTON).whileTrue(Commands.run (() -> { m_arm.armMotor.setVoltage(2); } ));
+    new JoystickButton(xboxController1, XboxConstants.X_BUTTON).whileTrue(Commands.run (() -> { m_arm.armMotor.setVoltage(-2); } ));
+    new JoystickButton(xboxController1, XboxConstants.START_BUTTON).whileTrue(Commands.run (() -> { m_arm.armMotor.setVoltage(0); } ));
+
+    new POVButton(xboxController1, 0).onTrue(
         Commands.runOnce(
             () -> {
-              m_arm.setGoal(ArmConstants.kArmStraightUp);
+            //  m_arm.setGoal(ArmConstants.kArmStraightUp);
               m_arm.enable();
               System.out.println("Y Pressed");
             },
             m_arm));
             
 
-    new JoystickButton(xboxController1, XboxConstants.START_BUTTON).onTrue(
+    new POVButton(xboxController1, 180).onTrue(
       Commands.runOnce(
         () -> {
-          m_arm.setGoal(ArmConstants.kArmLoadingLocation);
+          //m_arm.setGoal(ArmConstants.kArmLoadingLocation);
           m_arm.enable();
           System.out.println("Start Pressed");
         },
         m_arm));  
 
-    new JoystickButton(xboxController1, XboxConstants.BACK_BUTTON).onTrue(
+    new POVButton(xboxController1, 90).onTrue(
       Commands.runOnce(
         () -> {
-          m_arm.setGoal(ArmConstants.kArmRestingLocation);
+         // m_arm.setGoal(ArmConstants.kArmRestingLocation);
           m_arm.enable();
           System.out.println("Back Pressed");
         },
         m_arm));
-    new JoystickButton(xboxController1, XboxConstants.X_BUTTON).onTrue(
+    new POVButton(xboxController1, 270).onTrue(
       Commands.runOnce(
         () -> {
-          m_arm.setGoal(ArmConstants.kArmScoringLocation);
+       //   m_arm.setGoal(ArmConstants.kArmScoringLocation);
+          m_arm.setGoal(100);
           m_arm.enable();
           System.out.println("X Pressed");
         },
@@ -146,7 +153,7 @@ public class RobotContainer {
     
     
     //fix slow mode off a button
-    new JoystickButton(xboxController1,XboxConstants.Y_BUTTON).onTrue(new InstantCommand(() -> ArcadeDrive.isSlow = !ArcadeDrive.isSlow)); 
+    new JoystickButton(xboxController1,XboxConstants.B_BUTTON).onTrue(new InstantCommand(() -> ArcadeDrive.isSlow = !ArcadeDrive.isSlow)); 
   }
 
  
