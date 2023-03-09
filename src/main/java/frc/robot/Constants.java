@@ -21,6 +21,7 @@ public class Constants {
         public static final int RIGHT_BUMPER = 6;
         public static final int LEFT_STICK_X = 0;
         public static final int LEFT_STICK_Y = 1;
+        public static final int LEFT_STICK_CLICK = 9;
         public static final int RIGHT_STICK_X = 4;
         public static final int RIGHT_STICK_Y = 5;
         public static final int A_BUTTON = 1;

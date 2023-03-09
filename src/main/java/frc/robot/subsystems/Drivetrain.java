@@ -25,10 +25,10 @@ public class Drivetrain extends SubsystemBase {
 
     public Drivetrain() {
 
-        LF_motor.setInverted(false);
-        LB_motor.setInverted(false);
-        RF_motor.setInverted(true);
-        RB_motor.setInverted(true);
+        LF_motor.setInverted(true);
+        LB_motor.setInverted(true);
+        RF_motor.setInverted(false);
+        RB_motor.setInverted(false);
         LB_motor.follow(LF_motor);
         RB_motor.follow(RF_motor);
         LF_motor.setIdleMode(IdleMode.kBrake);

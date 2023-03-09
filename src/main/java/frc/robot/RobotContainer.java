@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.XboxConstants;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.CurvatureDrive;
 import frc.robot.commands.ArmMovement;
 import frc.robot.commands.AutoBalance;
 import frc.robot.commands.Autonomous;
@@ -61,10 +62,11 @@ public class RobotContainer {
     configureButtonBindings();
   
     // Driving Controls
-    m_drivetrain.setDefaultCommand(new ArcadeDrive(m_drivetrain,
+    m_drivetrain.setDefaultCommand(new CurvatureDrive(m_drivetrain,
       //Add a minus ( - ) to either of these to invert the direction the stick has to be pushed : ) - Julien
         () -> -xboxController1.getRawAxis(XboxConstants.LEFT_STICK_Y),
-        () -> -xboxController1.getRawAxis(XboxConstants.RIGHT_STICK_X)
+        () -> -xboxController1.getRawAxis(XboxConstants.RIGHT_STICK_X),
+        XboxConstants.LEFT_STICK_CLICK
         ));
 
     // m_arm.setDefaultCommand(Commands.run(() -> { m_arm.armMotor.setVoltage(0); }));
