@@ -49,7 +49,7 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
         
     armMotor.restoreFactoryDefaults();
     armMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
-    armMotor.setInverted(true);
+    armMotor.setInverted(false);
     m_encoder.setPosition(0);
     m_encoder.setPositionConversionFactor(ArmConstants.kRotationDegree);
     m_encoder.setVelocityConversionFactor(ArmConstants.kRotationDegree/60);
@@ -124,29 +124,30 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
   public void useOutput(double output, TrapezoidProfile.State setpoint) {
     // Calculate the feedforward from the sepoint
     // double feedforward = m_feedforward.calculate(setpoint.position, setpoint.velocity);
-    
-
-    
     // Add the feedforward to the PID output to get the motor output
     speed = output + ArmConstants.kFeedForward * setpoint.velocity;
+    if (Math.abs(speed) >= 0.1) {
+      speed = Math.copySign(0.1, speed);
+    }
     if (RobotBase.isSimulation()) {
       armSim.setInputVoltage(speed);
     }
     else {
       // armMotor.setVoltage(speed);
+     
       armMotor.setVoltage(speed);
     }
-    System.out.println("useOutput has been called  " + output + " <- output   " + speed + " <- speed");
+    // System.out.println("useOutput has been called  " + output + " <- output   " + speed + " <- speed");
   }
 
   @Override
   public double getMeasurement() {
-    System.out.println("getMeasure has been called" + m_encoder.getPosition());
+    // System.out.println("getMeasure has been called" + m_encoder.getPosition());
     if (RobotBase.isSimulation()) {
       return armEncoderSim.getDistance();
     }
     else {
-      return m_encoder.getPosition();
+      return -m_encoder.getPosition();
       
     }
     

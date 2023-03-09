@@ -36,11 +36,11 @@ public class CurvatureDrive extends CommandBase {
   public void execute() {
     if (isSlow) 
     {
-      this.drivetrain.m_robotDrive.curvatureDrive(forwardSpeed.get() * DriveConstants.SLOW_SPEED_FRACTION, turnSpeed.get() * DriveConstants.SLOW_SPEED_FRACTION, turnButton);
+      this.drivetrain.m_robotDrive.curvatureDrive(-forwardSpeed.get() * DriveConstants.SLOW_SPEED_FRACTION, turnSpeed.get() * DriveConstants.SLOW_SPEED_FRACTION, turnButton);
     }
     else
     {
-      this.drivetrain.m_robotDrive.curvatureDrive(forwardSpeed.get(), turnSpeed.get(), turnButton);
+      this.drivetrain.m_robotDrive.curvatureDrive(-forwardSpeed.get(), turnSpeed.get(), turnButton);
     }
   }
 
