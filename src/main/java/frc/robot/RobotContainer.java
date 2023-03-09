@@ -65,8 +65,7 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand(new CurvatureDrive(m_drivetrain,
       //Add a minus ( - ) to either of these to invert the direction the stick has to be pushed : ) - Julien
         () -> -xboxController1.getRawAxis(XboxConstants.LEFT_STICK_Y),
-        () -> -xboxController1.getRawAxis(XboxConstants.RIGHT_STICK_X),
-        XboxConstants.LEFT_STICK_CLICK
+        () -> -xboxController1.getRawAxis(XboxConstants.RIGHT_STICK_X)
         ));
 
     // m_arm.setDefaultCommand(Commands.run(() -> { m_arm.armMotor.setVoltage(0); }));
@@ -110,7 +109,7 @@ public class RobotContainer {
     new JoystickButton(xboxController1, XboxConstants.A_BUTTON).onTrue(new AutoBalance(m_drivetrain));
     new JoystickButton(xboxController1, XboxConstants.RIGHT_BUMPER).whileTrue(new SqueezyReleasy(m_claw, .9));
     new JoystickButton(xboxController1, XboxConstants.LEFT_BUMPER).whileTrue(new SqueezyReleasy(m_claw, -.9));
-    
+    new JoystickButton(xboxController1, XboxConstants.LEFT_STICK_CLICK).onTrue(new InstantCommand(() -> CurvatureDrive.turnButton = !CurvatureDrive.turnButton));
     new JoystickButton(xboxController1, XboxConstants.Y_BUTTON).whileTrue(Commands.run (() -> { m_arm.armMotor.setVoltage(2); } ));
     new JoystickButton(xboxController1, XboxConstants.X_BUTTON).whileTrue(Commands.run (() -> { m_arm.armMotor.setVoltage(-2); } ));
     new JoystickButton(xboxController1, XboxConstants.START_BUTTON).whileTrue(Commands.run (() -> { m_arm.armMotor.setVoltage(0); } ));
@@ -155,7 +154,7 @@ public class RobotContainer {
     
     
     //fix slow mode off a button
-    new JoystickButton(xboxController1,XboxConstants.B_BUTTON).onTrue(new InstantCommand(() -> ArcadeDrive.isSlow = !ArcadeDrive.isSlow)); 
+    new JoystickButton(xboxController1,XboxConstants.B_BUTTON).onTrue(new InstantCommand(() -> CurvatureDrive.isSlow = !CurvatureDrive.isSlow)); 
   }
 
  
