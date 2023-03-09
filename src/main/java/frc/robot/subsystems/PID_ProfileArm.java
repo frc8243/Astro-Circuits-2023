@@ -49,7 +49,7 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
         
     armMotor.restoreFactoryDefaults();
     armMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
-    armMotor.setInverted(false);
+    armMotor.setInverted(true);
     m_encoder.setPosition(0);
     m_encoder.setPositionConversionFactor(ArmConstants.kRotationDegree);
     m_encoder.setVelocityConversionFactor(ArmConstants.kRotationDegree/60);
@@ -100,7 +100,7 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
   @Override
   public void periodic() {
     super.periodic();
-    armMotor.set(speed);
+    // armMotor.set(speed);
 
     // Next, we update it. The standard loop time is 20ms.
     // Finally, we set our simulated encoder's readings
@@ -113,7 +113,6 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
     SmartDashboard.putNumber("armMotor", armMotor.get());
     SmartDashboard.putNumber("speed",speed);
     SmartDashboard.putNumber("ArmEncoderPosition",getMeasurement());
-
     
 
     
@@ -126,8 +125,10 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
     // double feedforward = m_feedforward.calculate(setpoint.position, setpoint.velocity);
     // Add the feedforward to the PID output to get the motor output
     speed = output + ArmConstants.kFeedForward * setpoint.velocity;
-    if (Math.abs(speed) >= 0.1) {
-      speed = Math.copySign(0.1, speed);
+    SmartDashboard.putNumber("Setpoint Velocity", setpoint.velocity);
+
+    if (Math.abs(speed) >= 8) {
+      speed = Math.copySign(8, speed);
     }
     if (RobotBase.isSimulation()) {
       armSim.setInputVoltage(speed);
@@ -147,7 +148,7 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
       return armEncoderSim.getDistance();
     }
     else {
-      return -m_encoder.getPosition();
+      return m_encoder.getPosition();
       
     }
     

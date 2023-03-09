@@ -24,6 +24,7 @@ public class Constants {
         public static final int LEFT_STICK_CLICK = 9;
         public static final int RIGHT_STICK_X = 4;
         public static final int RIGHT_STICK_Y = 5;
+        public static final int RIGHT_STICK_CLICK = 10;
         public static final int A_BUTTON = 1;
         public static final int B_BUTTON = 2;
         public static final int X_BUTTON = 3;
@@ -61,10 +62,10 @@ public class Constants {
         public static final double kSVolts = 2;
         public static final double kVVoltSecondPerRad = 1;
         public static final double kAVoltSecondSquaredPerRad = 1;
-        public static final double kMaxVelocityRadPerSecond = 0.0001; 
-        public static final double kMaxAccelerationRadPerSecSquared = 0.0001;
+        public static final double kMaxVelocityRadPerSecond = 1.5; 
+        public static final double kMaxAccelerationRadPerSecSquared = 0.1;
         public static final double kEncoderDistancePerPulse = 1;
-        public static final double kRotationDegree = 360.0/64.0;
+        public static final double kRotationDegree = Units.degreesToRadians(360.0/64.0);
         public static final double kGearRatio = 64;
         public static final double kArmOffsetRads = 0;
         public static final double kArmLength = Units.inchesToMeters(30);
@@ -75,7 +76,7 @@ public class Constants {
         public static final double kArmLoadingLocation = Units.degreesToRadians(105);
         public static final double kArmRestingLocation = Units.degreesToRadians(0);
         public static final double kArmScoringLocation = Units.degreesToRadians(80);
-        public static final double kArmStraightUp = Units.degreesToRadians(60);
+        public static final double kArmStraightUp = Units.degreesToRadians(210);
         public static final double kFeedForward = 0.133;
 
 
