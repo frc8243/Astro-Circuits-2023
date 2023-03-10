@@ -68,7 +68,6 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
           ArmConstants.kArmLength,
           ArmConstants.kArmMinAngle,
           ArmConstants.kArmMaxAngle,
-          ArmConstants.kArmMass,
           true);
     }
   }
