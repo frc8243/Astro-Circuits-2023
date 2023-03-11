@@ -46,6 +46,7 @@ public class Constants {
         public static final double TARGET_HEIGHT_METERS = Units.feetToMeters(2.08); // Height of target
         public static final double GOAL_RANGE_METERS = Units.feetToMeters(1);
         public static final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(0);
+        public static final double kAngleToleranceDegrees = 5;
     }
 
     public static final class BalanceConstants {
@@ -79,4 +80,6 @@ public class Constants {
         public static final double kArmStraightUp = Units.degreesToRadians(210);
         public static final double kFeedForward = 0.133;
     }
+
+
 }
