@@ -62,8 +62,8 @@ public class Constants {
         public static final double kSVolts = 2;
         public static final double kVVoltSecondPerRad = 1;
         public static final double kAVoltSecondSquaredPerRad = 1;
-        public static final double kMaxVelocityRadPerSecond = 1.5; 
-        public static final double kMaxAccelerationRadPerSecSquared = 0.6;
+        public static final double kMaxVelocityRadPerSecond = 1.5;
+        public static final double kMaxAccelerationRadPerSecSquared = 2.1;
         public static final double kEncoderDistancePerPulse = 1;
         public static final double kRotationDegree = Units.degreesToRadians(360.0/64.0);
         public static final double kGearRatio = 64;
@@ -78,9 +78,5 @@ public class Constants {
         public static final double kArmScoringLocation = Units.degreesToRadians(80);
         public static final double kArmStraightUp = Units.degreesToRadians(210);
         public static final double kFeedForward = 0.133;
-
-
-
-
     }
 }
