@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.VisionConstants;
 
-
 public class Limelight extends SubsystemBase {
 
   public static final GenericEntry amountTargets = Shuffleboard.getTab("Driver").add("Num of Targets", 0).getEntry();
@@ -34,8 +33,8 @@ public class Limelight extends SubsystemBase {
 
   public static boolean withinRangeRumble = false;
   public static boolean ledEnabled = false;
-  
-  Boolean photonNotFoundMessagePrinted = false ;
+
+  Boolean photonNotFoundMessagePrinted = false;
 
   public Limelight() {
 
@@ -53,50 +52,43 @@ public class Limelight extends SubsystemBase {
     SmartDashboard.putBoolean("Photon Limelight hasTargets: ", has_targets);
     if (has_targets) {
 
-        // List<PhotonTrackedTarget> targets = result.getTargets();
-        PhotonTrackedTarget best_target = result.getBestTarget();
+      // List<PhotonTrackedTarget> targets = result.getTargets();
+      PhotonTrackedTarget best_target = result.getBestTarget();
 
-        double distance_to_target = PhotonUtils.calculateDistanceToTargetMeters(
+      double distance_to_target = PhotonUtils.calculateDistanceToTargetMeters(
           VisionConstants.CAMERA_HEIGHT_METERS,
           VisionConstants.TARGET_HEIGHT_METERS,
           Units.degreesToRadians(VisionConstants.CAMERA_PITCH_RADIANS),
-          Units.degreesToRadians(best_target.getPitch())
-        );
+          Units.degreesToRadians(best_target.getPitch()));
 
-
-        Translation2d translation = PhotonUtils.estimateCameraToTargetTranslation(
+      Translation2d translation = PhotonUtils.estimateCameraToTargetTranslation(
           distance_to_target, Rotation2d.fromDegrees(-best_target.getYaw()));
 
+      double x_translation = translation.getX();
+      double y_translation = translation.getY();
 
-        double x_translation = translation.getX();
-        double y_translation = translation.getY();
-
-        node_x_entry.setDouble(x_translation);
-        node_y_entry.setDouble(y_translation);
-        double node_dist = Math.hypot(x_translation, y_translation);
-        angleToNode = Units.radiansToDegrees(Math.atan2(y_translation, x_translation));
-        node_distance_entry.setDouble(node_dist);
-        node_angle_entry.setDouble(angleToNode);
-        int countTargets = result.getTargets().size();
-        amountTargets.setDouble(countTargets);
-        boolean isInLine = Math.abs(angleToNode) < VisionConstants.kAngleToleranceDegrees;
-        if(withinRangeRumble && isInLine ){
-          RobotContainer.xboxController1.setRumble(GenericHID.RumbleType.kLeftRumble, 1);
-          try {
-            Thread.sleep(2);
-          } catch (InterruptedException e) {
-
-          }
-          RobotContainer.xboxController1.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
-          
-          
+      node_x_entry.setDouble(x_translation);
+      node_y_entry.setDouble(y_translation);
+      double node_dist = Math.hypot(x_translation, y_translation);
+      angleToNode = Units.radiansToDegrees(Math.atan2(y_translation, x_translation));
+      node_distance_entry.setDouble(node_dist);
+      node_angle_entry.setDouble(angleToNode);
+      int countTargets = result.getTargets().size();
+      amountTargets.setDouble(countTargets);
+      boolean isInLine = Math.abs(angleToNode) < VisionConstants.kAngleToleranceDegrees;
+      if (withinRangeRumble && isInLine) {
+        RobotContainer.xboxController1.setRumble(GenericHID.RumbleType.kLeftRumble, 1);
+        try {
+          Thread.sleep(2);
+        } catch (InterruptedException e) {
 
         }
-        in_line_entry.setBoolean(isInLine);
-        
+        RobotContainer.xboxController1.setRumble(GenericHID.RumbleType.kLeftRumble, 0);
 
-    }
-    else {
+      }
+      in_line_entry.setBoolean(isInLine);
+
+    } else {
       node_x_entry.setDouble(0);
       node_y_entry.setDouble(0);
       node_distance_entry.setDouble(0);
@@ -108,20 +100,15 @@ public class Limelight extends SubsystemBase {
     }
   }
 
-
   public static double getAngleToNode() {
     return angleToNode;
   }
 
-  
-
   @Override
   public void simulationPeriodic() {
-    //This method will be called once per scheduler run when in simulation
+    // This method will be called once per scheduler run when in simulation
 
   }
-
-
 
   public static void turnLEDOn() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);

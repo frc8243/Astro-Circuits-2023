@@ -107,19 +107,15 @@ public class RobotContainer {
     new JoystickButton(xboxController1, XboxConstants.A_BUTTON).onTrue(new AutoBalance(m_drivetrain));
     new JoystickButton(xboxController1, XboxConstants.RIGHT_BUMPER).whileTrue(new SqueezyReleasy(m_claw, .9));
     new JoystickButton(xboxController1, XboxConstants.LEFT_BUMPER).whileTrue(new SqueezyReleasy(m_claw, -.9));
-    new JoystickButton(xboxController1, XboxConstants.LEFT_STICK_CLICK)
-        .onTrue(new InstantCommand(() -> CurvatureDrive.turnButton = !CurvatureDrive.turnButton));
-    // new JoystickButton(xboxController1, XboxConstants.Y_BUTTON).whileTrue(Commands.run(() -> {
-    //   m_arm.armMotor.setVoltage(2);
-    // }));
-    // new JoystickButton(xboxController1, XboxConstants.X_BUTTON).whileTrue(Commands.run(() -> {
-    //   m_arm.armMotor.setVoltage(-2);
-    // }));
-    new JoystickButton(xboxController1, XboxConstants.START_BUTTON).whileTrue(Commands.run(() -> {
-      m_arm.armMotor.setVoltage(0);
-    }));
-    new JoystickButton(xboxController1, XboxConstants.RIGHT_STICK_CLICK).onTrue(new InstantCommand(
-      () -> CurvatureDrive.isSlow = !CurvatureDrive.isSlow));
+
+    new JoystickButton(xboxController1, XboxConstants.LEFT_STICK_CLICK).onTrue(
+      new InstantCommand(() -> CurvatureDrive.turnButton = !CurvatureDrive.turnButton));
+
+    new JoystickButton(xboxController1, XboxConstants.RIGHT_STICK_CLICK).onTrue(
+      new InstantCommand(() -> CurvatureDrive.isSlow = !CurvatureDrive.isSlow));
+
+    new JoystickButton(xboxController1, XboxConstants.START_BUTTON).onTrue(
+      new InstantCommand(() -> Limelight.withinRangeRumble = !Limelight.withinRangeRumble));  
 
     new JoystickButton(xboxController1, XboxConstants.Y_BUTTON).onTrue(
         Commands.runOnce(
@@ -157,9 +153,6 @@ public class RobotContainer {
             },
             m_arm));
 
-    new JoystickButton(xboxController1, XboxConstants.START_BUTTON).onTrue(new InstantCommand(
-      () -> Limelight.withinRangeRumble = !Limelight.withinRangeRumble ));
- 
     // fix slow mode off a button
 
   }
