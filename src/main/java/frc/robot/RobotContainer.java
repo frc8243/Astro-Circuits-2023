@@ -30,6 +30,7 @@ import frc.robot.commands.TurnToTarget;
 import frc.robot.commands.doNothingArm;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.NavX;
 import frc.robot.subsystems.PID_ProfileArm;
 
@@ -45,7 +46,7 @@ public class RobotContainer {
 
   // Declaring Controller
 
-  private final XboxController xboxController1 = new XboxController(0);
+  public static final XboxController xboxController1 = new XboxController(0);
   PhotonCamera camera = new PhotonCamera("OV5647");
   // Autonomous Position Chooser
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -156,8 +157,9 @@ public class RobotContainer {
             },
             m_arm));
 
-    
-
+    new JoystickButton(xboxController1, XboxConstants.START_BUTTON).onTrue(new InstantCommand(
+      () -> Limelight.withinRangeRumble = !Limelight.withinRangeRumble ));
+ 
     // fix slow mode off a button
 
   }
