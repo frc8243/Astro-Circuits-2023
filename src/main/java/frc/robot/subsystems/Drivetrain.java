@@ -27,6 +27,7 @@ public class Drivetrain extends SubsystemBase {
     public final RelativeEncoder rightEncoder = RF_motor.getEncoder(Type.kQuadrature, 8192);
     public final DifferentialDrive m_robotDrive = new DifferentialDrive(LF_motor, RF_motor);
 
+
     public Drivetrain() {
 
         LF_motor.setInverted(true);
@@ -55,7 +56,8 @@ public class Drivetrain extends SubsystemBase {
         // System.out.println("in periodic");
         SmartDashboard.putNumber("Left Encoder Value", leftEncoder.getPosition());
         SmartDashboard.putNumber("Right Encoder Value", rightEncoder.getPosition());
-
+        SmartDashboard.putNumber("Drivetrain/Right Speed", RF_motor.get());
+        SmartDashboard.putNumber("Drivetrain/Left Speed", LF_motor.get());
         
     }
 
@@ -68,7 +70,8 @@ public class Drivetrain extends SubsystemBase {
     public void setMotors(double leftSpeed, double rightSpeed) {
         LF_motor.set(leftSpeed);
         RF_motor.set(rightSpeed);
-        
+       
+
 
     }
 
