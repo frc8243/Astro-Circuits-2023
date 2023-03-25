@@ -39,10 +39,11 @@ public class Drivetrain extends SubsystemBase {
         LB_motor.setIdleMode(IdleMode.kBrake);
         RF_motor.setIdleMode(IdleMode.kBrake);
         RB_motor.setIdleMode(IdleMode.kBrake);
+        leftEncoder.setInverted(true);
         leftEncoder.setPosition(0);
         rightEncoder.setPosition(0);
-        leftEncoder.setPositionConversionFactor(0);
-        rightEncoder.setPositionConversionFactor(0);
+        // leftEncoder.setPositionConversionFactor(1/2.07);
+        // rightEncoder.setPositionConversionFactor(1/2.07);
         
 
     }

@@ -46,13 +46,13 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
                 ArmConstants.kMaxVelocityRadPerSecond,
                 ArmConstants.kMaxAccelerationRadPerSecSquared)),
         1);
-        
+
     armMotor.restoreFactoryDefaults();
     armMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
     armMotor.setInverted(true);
     m_encoder.setPosition(0);
     m_encoder.setPositionConversionFactor(ArmConstants.kRotationDegree);
-    m_encoder.setVelocityConversionFactor(ArmConstants.kRotationDegree/60);
+    m_encoder.setVelocityConversionFactor(ArmConstants.kRotationDegree / 60);
 
     // Degrees for one rotation of motor
     m_encoder.setPositionConversionFactor(ArmConstants.kRotationDegree);
@@ -89,10 +89,11 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
     SmartDashboard.putNumber("goal", m_controller.getGoal().position);
     SmartDashboard.putNumber("armVoltage", speed * RobotController.getBatteryVoltage());
     SmartDashboard.putNumber("armMotor", armMotor.get());
-    SmartDashboard.putNumber("speed",speed);
+    SmartDashboard.putNumber("speed", speed);
     // SimBattery estimates loaded battery voltages
     RoboRioSim.setVInVoltage(BatterySim.calculateDefaultBatteryLoadedVoltage(armSim.getCurrentDrawAmps()));
-    RobotContainer.armMechanism.setAngle(Units.radiansToDegrees(armSim.getAngleRads()+ArmConstants.kArmOffsetInDegrees));
+    RobotContainer.armMechanism
+        .setAngle(Units.radiansToDegrees(armSim.getAngleRads() + ArmConstants.kArmOffsetInDegrees));
 
   }
 
@@ -104,24 +105,22 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
     // Next, we update it. The standard loop time is 20ms.
     // Finally, we set our simulated encoder's readings
     // sets our simulated encoder speeds
-    
 
     // SmartDashboard.putNumber("arm angle", armSim.getAngleRads());
-    SmartDashboard.putNumber("goal", m_controller.getGoal().position);
+    SmartDashboard.putNumber("armGoal", m_controller.getGoal().position);
     SmartDashboard.putNumber("armVoltage", speed);
     SmartDashboard.putNumber("armMotor", armMotor.get());
-    SmartDashboard.putNumber("speed",speed);
-    SmartDashboard.putNumber("ArmEncoderPosition",getMeasurement());
-    
+    SmartDashboard.putNumber("armSpeed", speed);
+    SmartDashboard.putNumber("ArmEncoderPosition", getMeasurement());
 
-    
     // System.out.println("Non-Sim Arm System is live!");
   }
 
   @Override
   public void useOutput(double output, TrapezoidProfile.State setpoint) {
     // Calculate the feedforward from the sepoint
-    // double feedforward = m_feedforward.calculate(setpoint.position, setpoint.velocity);
+    // double feedforward = m_feedforward.calculate(setpoint.position,
+    // setpoint.velocity);
     // Add the feedforward to the PID output to get the motor output
     speed = output + ArmConstants.kFeedForward * setpoint.velocity;
     SmartDashboard.putNumber("Setpoint Velocity", setpoint.velocity);
@@ -131,13 +130,13 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
     }
     if (RobotBase.isSimulation()) {
       armSim.setInputVoltage(speed);
-    }
-    else {
+    } else {
       // armMotor.setVoltage(speed);
-     
+
       armMotor.setVoltage(speed);
     }
-    // System.out.println("useOutput has been called  " + output + " <- output   " + speed + " <- speed");
+    // System.out.println("useOutput has been called " + output + " <- output " +
+    // speed + " <- speed");
   }
 
   @Override
@@ -145,12 +144,17 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
     // System.out.println("getMeasure has been called" + m_encoder.getPosition());
     if (RobotBase.isSimulation()) {
       return armEncoderSim.getDistance();
-    }
-    else {
+    } else {
       return m_encoder.getPosition();
-      
-    }
-    
 
+    }
+  }
+
+  public double getGoal() {
+    return m_controller.getGoal().position;
+  }
+
+  public boolean atGoal() {
+    return Math.abs(getMeasurement() - getGoal()) <= ArmConstants.kArmTolerance;
   }
 }

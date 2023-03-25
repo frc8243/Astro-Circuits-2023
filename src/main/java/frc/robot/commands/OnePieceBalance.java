@@ -4,7 +4,13 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
+import frc.robot.Constants.ArmConstants;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.PID_ProfileArm;
@@ -18,8 +24,28 @@ public class OnePieceBalance extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new DriveForwardGivenDistance(.2, drivetrain),
-      new SqueezyReleasy(claw, -0.1).withTimeout(0.5)
-    );
+      
+      new InstantCommand( // Sets arm down to score
+          () -> {
+            arm.setGoal(ArmConstants.kArmScoringLocation);
+            arm.enable();
+            // System.out.println("Back Pressed");
+            },
+          arm),
+      new WaitUntilCommand(() -> arm.atGoal()),
+      new WaitCommand(0.5),
+      new SqueezyReleasy(claw, -0.9).withTimeout(0.5),
+      new InstantCommand( // Sets arm down to score
+          () -> {
+            arm.setGoal(ArmConstants.kArmRestingLocation);
+            arm.enable();
+            // System.out.println("Back Pressed");
+            },
+          arm),
+      new WaitUntilCommand(() -> arm.atGoal()),
+      new PrintCommand("Arm reached resting position"),
+      new DriveForwardGivenDistance(-2, drivetrain),
+      new PrintCommand("Got past Drive Forward Given Distnace")
+      );
   }
 }
