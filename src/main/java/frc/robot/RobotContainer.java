@@ -25,6 +25,7 @@ import frc.robot.commands.ArmMovement;
 import frc.robot.commands.AutoBalance;
 import frc.robot.commands.Autonomous;
 import frc.robot.commands.MoveToTarget;
+import frc.robot.commands.OnePieceBalance;
 import frc.robot.commands.SqueezyReleasy;
 import frc.robot.commands.TurnToTarget;
 import frc.robot.commands.doNothingArm;
@@ -75,6 +76,9 @@ public class RobotContainer {
         new AutoBalance(m_drivetrain));
     m_chooser.addOption("balanceTesting", balanceTesting);
 
+    CommandBase onePieceBalance = new OnePieceBalance(m_drivetrain, m_claw, m_arm);
+    m_chooser.addOption("onePieceBalance", onePieceBalance);
+
     SmartDashboard.putData("Auton", m_chooser);
 
     Mechanism2d mech = new Mechanism2d(1, 1);
@@ -114,22 +118,22 @@ public class RobotContainer {
     // new JoystickButton(xboxController1, XboxConstants.X_BUTTON).whileTrue(Commands.run(() -> {
     //   m_arm.armMotor.setVoltage(-2);
     // }));
-    new JoystickButton(xboxController1, XboxConstants.START_BUTTON).whileTrue(Commands.run(() -> {
-      m_arm.armMotor.setVoltage(0);
-    }));
+    // new JoystickButton(xboxController1, XboxConstants.START_BUTTON).whileTrue(Commands.run(() -> {
+    //   m_arm.armMotor.setVoltage(0);
+    // }));
     new JoystickButton(xboxController1, XboxConstants.RIGHT_STICK_CLICK).onTrue(new InstantCommand(
       () -> CurvatureDrive.isSlow = !CurvatureDrive.isSlow));
 
-    new JoystickButton(xboxController1, XboxConstants.Y_BUTTON).onTrue(
+    new JoystickButton(xboxController1, XboxConstants.A_BUTTON).onTrue(
         Commands.runOnce(
             () -> {
-              m_arm.setGoal(ArmConstants.kArmStraightUp);
+              m_arm.setGoal(ArmConstants.kArmToFloor);
               m_arm.enable();
               System.out.println("Y Pressed");
             },
             m_arm));
 
-    new JoystickButton(xboxController1, XboxConstants.A_BUTTON).onTrue(
+    new JoystickButton(xboxController1, XboxConstants.Y_BUTTON).onTrue(
         Commands.runOnce(
             () -> {
               m_arm.setGoal(ArmConstants.kArmLoadingLocation);

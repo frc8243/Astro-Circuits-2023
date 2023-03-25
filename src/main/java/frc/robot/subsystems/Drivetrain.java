@@ -23,8 +23,8 @@ public class Drivetrain extends SubsystemBase {
     private final CANSparkMax LF_motor = new CANSparkMax(Constants.DriveConstants.kLeftFront,MotorType.kBrushed);
     private final CANSparkMax RB_motor = new CANSparkMax(Constants.DriveConstants.kRightBack,MotorType.kBrushed);
     private final CANSparkMax RF_motor = new CANSparkMax(Constants.DriveConstants.kRightFront,MotorType.kBrushed);
-    private final RelativeEncoder leftEncoder = LF_motor.getEncoder(Type.kQuadrature, 8192);
-    private final RelativeEncoder rightEncoder = RF_motor.getEncoder(Type.kQuadrature, 8192);
+    public final RelativeEncoder leftEncoder = LF_motor.getEncoder(Type.kQuadrature, 8192);
+    public final RelativeEncoder rightEncoder = RF_motor.getEncoder(Type.kQuadrature, 8192);
     public final DifferentialDrive m_robotDrive = new DifferentialDrive(LF_motor, RF_motor);
 
     public Drivetrain() {
@@ -41,7 +41,9 @@ public class Drivetrain extends SubsystemBase {
         RB_motor.setIdleMode(IdleMode.kBrake);
         leftEncoder.setPosition(0);
         rightEncoder.setPosition(0);
-        leftEncoder.set
+        leftEncoder.setPositionConversionFactor(0);
+        rightEncoder.setPositionConversionFactor(0);
+        
 
     }
 
