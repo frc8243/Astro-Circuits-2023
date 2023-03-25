@@ -19,7 +19,7 @@ public class Claw extends SubsystemBase {
     clawMotor.restoreFactoryDefaults();
     clawMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
   }
-
+ 
   public void setMotor(double power){
     clawMotor.set(power);
 
