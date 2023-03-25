@@ -31,7 +31,7 @@ public class AutoBalance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    speed = BalanceConstants.kP * NavX.ahrs.getRoll();
+    speed = BalanceConstants.kP * NavX.ahrs.getRoll(); //TODO : get correct roll/yaw/pitch thing
     if (speed < 0) {
       speed *= BalanceConstants.REVERSE_POWER_MULTIPLIER;
     }
