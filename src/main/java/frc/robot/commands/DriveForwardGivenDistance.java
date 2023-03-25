@@ -29,9 +29,7 @@ public class DriveForwardGivenDistance extends CommandBase {
   @Override
   public void initialize() {
 
-    currentPosition = (
-      m_Drivetrain.leftEncoder.getPosition() +
-      m_Drivetrain.rightEncoder.getPosition());
+    currentPosition = (m_Drivetrain.leftEncoder.getPosition() + m_Drivetrain.rightEncoder.getPosition()) / 2 ;
     
     System.out.println("starting current position" + currentPosition);
 
