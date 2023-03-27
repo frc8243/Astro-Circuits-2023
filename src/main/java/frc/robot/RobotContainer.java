@@ -21,7 +21,6 @@ import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.XboxConstants;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.CurvatureDrive;
-import frc.robot.commands.DriveForwardGivenDistance;
 import frc.robot.commands.ArmMovement;
 import frc.robot.commands.AutoBalance;
 import frc.robot.commands.Autonomous;
@@ -109,7 +108,6 @@ public class RobotContainer {
     // new JoystickButton(xboxController1, XboxConstants.RIGHT_BUMPER).onTrue(new
     // MoveToTarget(m_drivetrain,1));
     //new JoystickButton(xboxController1, XboxConstants.A_BUTTON).onTrue(new AutoBalance(m_drivetrain));
-    new JoystickButton(xboxController1, XboxConstants.START_BUTTON).onTrue(new DriveForwardGivenDistance(1, m_drivetrain));
     new JoystickButton(xboxController1, XboxConstants.RIGHT_BUMPER).whileTrue(new SqueezyReleasy(m_claw, .9));
     new JoystickButton(xboxController1, XboxConstants.LEFT_BUMPER).whileTrue(new SqueezyReleasy(m_claw, -.9));
     new JoystickButton(xboxController1, XboxConstants.LEFT_STICK_CLICK)
