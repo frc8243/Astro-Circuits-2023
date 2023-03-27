@@ -13,10 +13,10 @@ public class SqueezyReleasy extends CommandBase {
 
   private final double power;
   private final Claw claw;
-  DigitalInput limit = new DigitalInput(0);
 
   public SqueezyReleasy(Claw clawSubsystem, double power) {
     this.claw = clawSubsystem;
+    // clawLimit = new DigitalInput(0);
     this.power = power;
     addRequirements(clawSubsystem);
   }
@@ -30,14 +30,30 @@ public class SqueezyReleasy extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(!limit.get()){
-      this.claw.setMotor(power);
-      System.out.println("Claw motor power : " + power);
+    if (power < 0) {
+      if (claw.clawLimitOut.get()) {
+        this.claw.setMotor(power);
+      } 
+      else {
+        this.claw.setMotor(0);
+        System.out.println("Claw is at maximum");
+      }
+    } 
+    else if (power > 0) {
+      if (claw.clawLimitIn.get()) {
+        this.claw.setMotor(power);
+      } 
+      else {
+        this.claw.setMotor(0);
+        System.out.println("Claw is at minimum");
+      }
+    } 
+    else {
+      System.out.println("Something is horribly wrong.");
     }
-    else{
-      System.out.println("Claw has hit max");
-    }
-    
+
+    System.out.println("Claw motor power : " + power);
+
   }
 
   // Called once the command ends or is interrupted.

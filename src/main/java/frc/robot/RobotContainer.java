@@ -3,6 +3,7 @@ package frc.robot;
 
 import org.photonvision.PhotonCamera;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
@@ -13,6 +14,7 @@ import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -41,8 +43,9 @@ public class RobotContainer {
   public final NavX m_navx = new NavX();
   public final Claw m_claw = new Claw();
   public final PID_ProfileArm m_arm = new PID_ProfileArm();
-
+  // final DigitalInput clawLimit = new DigitalInput(0);
   public static MechanismLigament2d armMechanism;
+  
 
   // Declaring Controller
 
@@ -107,8 +110,8 @@ public class RobotContainer {
     // TurnToTarget(m_drivetrain));
     // new JoystickButton(xboxController1, XboxConstants.RIGHT_BUMPER).onTrue(new
     // MoveToTarget(m_drivetrain,1));
-    //new JoystickButton(xboxController1, XboxConstants.A_BUTTON).onTrue(new AutoBalance(m_drivetrain));
-    new JoystickButton(xboxController1, XboxConstants.RIGHT_BUMPER).whileTrue(new SqueezyReleasy(m_claw, .9));
+    //new JoystickButton(xboxController1, XboxConstants.A_BUTTON).onTrue(new AutoBalance(m_drivetrain))
+    new JoystickButton(xboxController1, XboxConstants.RIGHT_BUMPER).whileTrue(new SqueezyReleasy(m_claw, .9))/* .unless(clawLimit.get() > 0))*/;
     new JoystickButton(xboxController1, XboxConstants.LEFT_BUMPER).whileTrue(new SqueezyReleasy(m_claw, -.9));
     new JoystickButton(xboxController1, XboxConstants.LEFT_STICK_CLICK)
         .onTrue(new InstantCommand(() -> CurvatureDrive.turnButton = !CurvatureDrive.turnButton));
