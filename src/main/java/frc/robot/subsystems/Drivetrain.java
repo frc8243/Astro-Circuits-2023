@@ -5,9 +5,11 @@ import java.net.CacheRequest;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 // Imports
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.SparkMaxRelativeEncoder.Type;
 
 import edu.wpi.first.wpilibj.CAN;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -21,6 +23,8 @@ public class Drivetrain extends SubsystemBase {
     private final CANSparkMax LF_motor = new CANSparkMax(Constants.DriveConstants.kLeftFront,MotorType.kBrushed);
     private final CANSparkMax RB_motor = new CANSparkMax(Constants.DriveConstants.kRightBack,MotorType.kBrushed);
     private final CANSparkMax RF_motor = new CANSparkMax(Constants.DriveConstants.kRightFront,MotorType.kBrushed);
+    public final RelativeEncoder leftEncoder = LF_motor.getEncoder(Type.kQuadrature, 8192);
+    public final RelativeEncoder rightEncoder = RF_motor.getEncoder(Type.kQuadrature, 8192);
     public final DifferentialDrive m_robotDrive = new DifferentialDrive(LF_motor, RF_motor);
 
     public Drivetrain() {
@@ -35,6 +39,12 @@ public class Drivetrain extends SubsystemBase {
         LB_motor.setIdleMode(IdleMode.kBrake);
         RF_motor.setIdleMode(IdleMode.kBrake);
         RB_motor.setIdleMode(IdleMode.kBrake);
+        leftEncoder.setInverted(true);
+        leftEncoder.setPosition(0);
+        rightEncoder.setPosition(0);
+        // leftEncoder.setPositionConversionFactor(1/2.07);
+        // rightEncoder.setPositionConversionFactor(1/2.07);
+        
 
     }
 
@@ -43,6 +53,10 @@ public class Drivetrain extends SubsystemBase {
         // SmartDashboard.putNumber("leftSpeed", );
         // SmartDashboard.putNumber("rightSpeed", RB_motor.getMotorOutputPercent());
         // System.out.println("in periodic");
+        SmartDashboard.putNumber("Left Encoder Value", leftEncoder.getPosition());
+        SmartDashboard.putNumber("Right Encoder Value", rightEncoder.getPosition());
+
+        
     }
 
     @Override
