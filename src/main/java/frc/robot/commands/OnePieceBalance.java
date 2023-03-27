@@ -44,7 +44,7 @@ public class OnePieceBalance extends SequentialCommandGroup {
           arm),
       new WaitUntilCommand(() -> arm.atGoal()),
       new PrintCommand("Arm reached resting position"),
-      new DriveForwardGivenDistance(-2, drivetrain),
+      new DriveForwardGivenDistanceUsingTime(-1 , drivetrain), //This number is in meters
       new PrintCommand("Got past Drive Forward Given Distnace")
       );
   }
