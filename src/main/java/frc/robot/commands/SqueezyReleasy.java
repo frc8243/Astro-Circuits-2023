@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Claw;
 
@@ -12,6 +13,7 @@ public class SqueezyReleasy extends CommandBase {
 
   private final double power;
   private final Claw claw;
+  DigitalInput limit = new DigitalInput(0);
 
   public SqueezyReleasy(Claw clawSubsystem, double power) {
     this.claw = clawSubsystem;
@@ -28,8 +30,14 @@ public class SqueezyReleasy extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    this.claw.setMotor(power);
-    System.out.println("Claw motor power : " + power);
+    if(!limit.get()){
+      this.claw.setMotor(power);
+      System.out.println("Claw motor power : " + power);
+    }
+    else{
+      System.out.println("Claw has hit max");
+    }
+    
   }
 
   // Called once the command ends or is interrupted.
