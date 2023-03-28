@@ -4,7 +4,10 @@ package frc.robot;
 import org.photonvision.PhotonCamera;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismRoot2d;
@@ -42,9 +45,11 @@ public class RobotContainer {
   public final Drivetrain m_drivetrain = new Drivetrain();
   public final NavX m_navx = new NavX();
   public final Claw m_claw = new Claw();
-  public final PID_ProfileArm m_arm = new PID_ProfileArm();
+  public final static PID_ProfileArm m_arm = new PID_ProfileArm();
+  
   // final DigitalInput clawLimit = new DigitalInput(0);
   public static MechanismLigament2d armMechanism;
+  public static PowerDistribution pdp;
   
 
   // Declaring Controller
@@ -58,6 +63,8 @@ public class RobotContainer {
     // Smartdashboard Subsystemsnull, nul
     SmartDashboard.putData(m_drivetrain);
     configureButtonBindings();
+    DriverStation.silenceJoystickConnectionWarning(true);
+    pdp = new PowerDistribution(1, ModuleType.kRev);
 
     // Driving Controls
     m_drivetrain.setDefaultCommand(new CurvatureDrive(m_drivetrain,
