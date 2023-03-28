@@ -1,9 +1,6 @@
 
 package frc.robot;
 
-import org.photonvision.PhotonCamera;
-
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
@@ -14,20 +11,14 @@ import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.XboxConstants;
-import frc.robot.commands.auton.AutoBalance;
+import frc.robot.Constants.clawConstants;
 import frc.robot.commands.auton.OnePieceBalance;
 import frc.robot.commands.claw.SqueezyReleasy;
-import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.drivetrain.CurvatureDrive;
-import frc.robot.commands.drivetrain.MoveToTarget;
-import frc.robot.commands.drivetrain.TurnToTarget;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.NavX;
@@ -40,14 +31,13 @@ public class RobotContainer {
   public final NavX m_navx = new NavX();
   public final Claw m_claw = new Claw();
   public final static PID_ProfileArm m_arm = new PID_ProfileArm();
-  // final DigitalInput clawLimit = new DigitalInput(0);
+
   public static MechanismLigament2d armMechanism;
   
 
   // Declaring Controller
 
   private final XboxController xboxController1 = new XboxController(0);
-  PhotonCamera camera = new PhotonCamera("OV5647");
   // Autonomous Position Chooser
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -60,11 +50,10 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand(new CurvatureDrive(m_drivetrain,
         // Add a minus ( - ) to either of these to invert the direction the stick has to
         // be pushed : ) - Julien
-        () -> xboxController1.getRawAxis(XboxConstants.LEFT_STICK_Y),
-        () -> -xboxController1.getRawAxis(XboxConstants.RIGHT_STICK_X)));
+        () -> xboxController1.getRawAxis(XboxConstants.kLeftStickY),
+        () -> -xboxController1.getRawAxis(XboxConstants.kRightStickX)));
 
-    // m_arm.setDefaultCommand(Commands.run(() -> { m_arm.armMotor.setVoltage(0);
-    // }));
+  
 
     CommandBase onePieceBalance = new OnePieceBalance(m_drivetrain, m_claw, m_arm);
     m_chooser.addOption("onePieceBalance", onePieceBalance);
@@ -77,44 +66,33 @@ public class RobotContainer {
     armMechanism.setColor(new Color8Bit(222, 28, 28));
     SmartDashboard.putData("Mech2d", mech);
 
-    // try {
-    // CameraServer.startAutomaticCapture(1);
-    // } catch (Exception ex1) {
-    // System.out.println("Camera not found");
-    // }
-    // CameraServer.startAutomaticCapture();
   }
 
   public static RobotContainer getInstance() {
     return m_robotContainer;
   }
 
-  /**
-   * Button bindings go below
-   */
-  private void configureButtonBindings() {
-    // new JoystickButton(xboxController1, XboxConstants.LEFT_BUMPER).onTrue(new
-    // TurnToTarget(m_drivetrain));
-    // new JoystickButton(xboxController1, XboxConstants.RIGHT_BUMPER).onTrue(new
-    // MoveToTarget(m_drivetrain,1));
-    //new JoystickButton(xboxController1, XboxConstants.A_BUTTON).onTrue(new AutoBalance(m_drivetrain))
-    new JoystickButton(xboxController1, XboxConstants.RIGHT_BUMPER).whileTrue(new SqueezyReleasy(m_claw, .9))/* .unless(clawLimit.get() > 0))*/;
-    new JoystickButton(xboxController1, XboxConstants.LEFT_BUMPER).whileTrue(new SqueezyReleasy(m_claw, -.9));
-    new JoystickButton(xboxController1, XboxConstants.LEFT_STICK_CLICK)
-        .onTrue(new InstantCommand(() -> CurvatureDrive.turnButton = !CurvatureDrive.turnButton));
-    // new JoystickButton(xboxController1, XboxConstants.Y_BUTTON).whileTrue(Commands.run(() -> {
-    //   m_arm.armMotor.setVoltage(2);
-    // }));
-    // new JoystickButton(xboxController1, XboxConstants.X_BUTTON).whileTrue(Commands.run(() -> {
-    //   m_arm.armMotor.setVoltage(-2);
-    // }));
-    // new JoystickButton(xboxController1, XboxConstants.START_BUTTON).whileTrue(Commands.run(() -> {
-    //   m_arm.armMotor.setVoltage(0);
-    // }));
-    new JoystickButton(xboxController1, XboxConstants.RIGHT_STICK_CLICK).onTrue(new InstantCommand(
-      () -> CurvatureDrive.isSlow = !CurvatureDrive.isSlow));
 
-    new JoystickButton(xboxController1, XboxConstants.A_BUTTON).onTrue(
+  /* Button Bindings! Buttons are formatted as XboxConstants.(NAME_OF_BUTTON) */
+  private void configureButtonBindings() {
+
+    new JoystickButton(xboxController1, XboxConstants.kRightBumper).whileTrue(
+      new SqueezyReleasy(m_claw, clawConstants.kClawSpeed)
+      );
+      
+    new JoystickButton(xboxController1, XboxConstants.kLeftBumper).whileTrue(
+      new SqueezyReleasy(m_claw, -clawConstants.kClawSpeed)
+      );
+
+    new JoystickButton(xboxController1, XboxConstants.kLeftStickClick).onTrue(
+      new InstantCommand( () -> CurvatureDrive.turnButton = !CurvatureDrive.turnButton)
+      );
+    
+    new JoystickButton(xboxController1, XboxConstants.kRightStickClick).onTrue(
+      new InstantCommand( () -> CurvatureDrive.isSlow = !CurvatureDrive.isSlow)
+      );
+
+    new JoystickButton(xboxController1, XboxConstants.kAButton).onTrue(
         Commands.runOnce(
             () -> {
               m_arm.setGoal(ArmConstants.kArmToFloor);
@@ -123,7 +101,7 @@ public class RobotContainer {
             },
             m_arm));
 
-    new JoystickButton(xboxController1, XboxConstants.Y_BUTTON).onTrue(
+    new JoystickButton(xboxController1, XboxConstants.kYButton).onTrue(
         Commands.runOnce(
             () -> {
               m_arm.setGoal(ArmConstants.kArmLoadingLocation);
@@ -132,7 +110,7 @@ public class RobotContainer {
             },
             m_arm));
 
-    new JoystickButton(xboxController1, XboxConstants.B_BUTTON).onTrue(
+    new JoystickButton(xboxController1, XboxConstants.kBButton).onTrue(
         Commands.runOnce(
             () -> {
               m_arm.setGoal(ArmConstants.kArmRestingLocation);
@@ -140,20 +118,16 @@ public class RobotContainer {
               System.out.println("Back Pressed");
             },
             m_arm));
-    new JoystickButton(xboxController1, XboxConstants.X_BUTTON).onTrue(
-        Commands.runOnce(
-            () -> {
-              m_arm.setGoal(ArmConstants.kArmScoringLocation);
-              // m_arm.setGoal(100);
-              m_arm.enable();
-              System.out.println("X Pressed");
-            },
-            m_arm));
 
-    
-
-    // fix slow mode off a button
-
+    new JoystickButton(xboxController1, XboxConstants.kXButton).onTrue(
+      Commands.runOnce(
+        () -> {
+          m_arm.setGoal(ArmConstants.kArmScoringLocation);
+            // m_arm.setGoal(100);
+            m_arm.enable();
+            System.out.println("X Pressed");
+          },
+          m_arm));
   }
 
   // BEGIN AUTOGENERATED CODE, SOURCE=ROBOTBUILDER ID=FUNCTIONS

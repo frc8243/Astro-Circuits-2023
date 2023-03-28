@@ -9,21 +9,21 @@ import com.revrobotics.SparkMaxRelativeEncoder.Type;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants.DriveConstants;;
 
 public class Drivetrain extends SubsystemBase {
 
-    private final CANSparkMax LB_motor = new CANSparkMax(Constants.DriveConstants.kLeftBack, MotorType.kBrushed);
-    private final CANSparkMax LF_motor = new CANSparkMax(Constants.DriveConstants.kLeftFront,MotorType.kBrushed);
-    private final CANSparkMax RB_motor = new CANSparkMax(Constants.DriveConstants.kRightBack,MotorType.kBrushed);
-    private final CANSparkMax RF_motor = new CANSparkMax(Constants.DriveConstants.kRightFront,MotorType.kBrushed);
+    private final CANSparkMax LB_motor = new CANSparkMax(DriveConstants.kLeftBack,MotorType.kBrushed);
+    private final CANSparkMax LF_motor = new CANSparkMax(DriveConstants.kLeftFront,MotorType.kBrushed);
+    private final CANSparkMax RB_motor = new CANSparkMax(DriveConstants.kRightBack,MotorType.kBrushed);
+    private final CANSparkMax RF_motor = new CANSparkMax(DriveConstants.kRightFront,MotorType.kBrushed);
     public final RelativeEncoder leftEncoder = LF_motor.getEncoder(Type.kQuadrature, 8192);
     public final RelativeEncoder rightEncoder = RF_motor.getEncoder(Type.kQuadrature, 8192);
     public final DifferentialDrive m_robotDrive = new DifferentialDrive(LF_motor, RF_motor);
 
 
     public Drivetrain() {
-
+        LF_motor.restoreFactoryDefaults();
         LF_motor.setInverted(true);
         LB_motor.setInverted(true);
         RF_motor.setInverted(false);

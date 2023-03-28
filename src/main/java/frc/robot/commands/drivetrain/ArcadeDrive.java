@@ -35,7 +35,7 @@ public class ArcadeDrive extends CommandBase {
   
 
         if(isSlow){
-            this.drivetrain.m_robotDrive.arcadeDrive(forwardSpeed.get() * DriveConstants.SLOW_SPEED_FRACTION, turnSpeed.get() * DriveConstants.SLOW_SPEED_FRACTION);
+            this.drivetrain.m_robotDrive.arcadeDrive(forwardSpeed.get() * DriveConstants.kSlowMultiplier, turnSpeed.get() * DriveConstants.kSlowMultiplier);
         }
         else{
             this.drivetrain.m_robotDrive.arcadeDrive(forwardSpeed.get(), turnSpeed.get());

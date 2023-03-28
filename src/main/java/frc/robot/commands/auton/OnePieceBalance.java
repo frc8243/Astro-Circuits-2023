@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.Constants.ArmConstants;
+import frc.robot.Constants.clawConstants;
 import frc.robot.commands.claw.SqueezyReleasy;
 import frc.robot.commands.drivetrain.DriveForwardGivenDistanceUsingTime;
 import frc.robot.subsystems.Claw;
@@ -35,7 +36,7 @@ public class OnePieceBalance extends SequentialCommandGroup {
           arm),
       new WaitUntilCommand(() -> arm.atGoal()),
       new WaitCommand(0.5),
-      new SqueezyReleasy(claw, -0.9).withTimeout(0.5),
+      new SqueezyReleasy(claw, -clawConstants.kClawSpeed).withTimeout(0.5),
       new InstantCommand( // Sets arm down to score
           () -> {
             arm.setGoal(ArmConstants.kArmRestingLocation);
