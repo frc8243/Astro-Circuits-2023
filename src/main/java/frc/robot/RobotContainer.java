@@ -21,16 +21,13 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.XboxConstants;
-import frc.robot.commands.ArcadeDrive;
-import frc.robot.commands.CurvatureDrive;
-import frc.robot.commands.ArmMovement;
-import frc.robot.commands.AutoBalance;
-import frc.robot.commands.Autonomous;
-import frc.robot.commands.MoveToTarget;
-import frc.robot.commands.OnePieceBalance;
-import frc.robot.commands.SqueezyReleasy;
-import frc.robot.commands.TurnToTarget;
-import frc.robot.commands.doNothingArm;
+import frc.robot.commands.auton.AutoBalance;
+import frc.robot.commands.auton.OnePieceBalance;
+import frc.robot.commands.claw.SqueezyReleasy;
+import frc.robot.commands.drivetrain.ArcadeDrive;
+import frc.robot.commands.drivetrain.CurvatureDrive;
+import frc.robot.commands.drivetrain.MoveToTarget;
+import frc.robot.commands.drivetrain.TurnToTarget;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.NavX;
@@ -42,7 +39,7 @@ public class RobotContainer {
   public final Drivetrain m_drivetrain = new Drivetrain();
   public final NavX m_navx = new NavX();
   public final Claw m_claw = new Claw();
-  public final PID_ProfileArm m_arm = new PID_ProfileArm();
+  public final static PID_ProfileArm m_arm = new PID_ProfileArm();
   // final DigitalInput clawLimit = new DigitalInput(0);
   public static MechanismLigament2d armMechanism;
   
@@ -68,16 +65,6 @@ public class RobotContainer {
 
     // m_arm.setDefaultCommand(Commands.run(() -> { m_arm.armMotor.setVoltage(0);
     // }));
-
-    CommandBase position1 = new SequentialCommandGroup(
-        new Autonomous(-0.25, 4, m_drivetrain),
-        new Autonomous(0, 10, m_drivetrain));
-    m_chooser.addOption("position1", position1);
-
-    CommandBase balanceTesting = new SequentialCommandGroup(
-        new Autonomous(0.5, 1.5, m_drivetrain),
-        new AutoBalance(m_drivetrain));
-    m_chooser.addOption("balanceTesting", balanceTesting);
 
     CommandBase onePieceBalance = new OnePieceBalance(m_drivetrain, m_claw, m_arm);
     m_chooser.addOption("onePieceBalance", onePieceBalance);
