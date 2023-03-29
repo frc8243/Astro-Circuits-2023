@@ -18,10 +18,10 @@ public class NavX extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putBoolean("NavX Connected", ahrs.isConnected());
-        SmartDashboard.putNumber("NavX Yaw", ahrs.getYaw());
-        SmartDashboard.putNumber("NavX Pitch", ahrs.getPitch());
-        SmartDashboard.putNumber("NavX Roll", ahrs.getRoll());
+        SmartDashboard.putBoolean("NavX/Connected", ahrs.isConnected());
+        SmartDashboard.putNumber("NavX/Yaw °", ahrs.getYaw());
+        SmartDashboard.putNumber("NavX/Pitch °", ahrs.getPitch());
+        SmartDashboard.putNumber("NavX/Roll °", ahrs.getRoll());
         // System.out.println("NavX : )");
     }
 

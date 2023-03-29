@@ -5,6 +5,8 @@
 package frc.robot.commands.drivetrain;
 
 import java.util.function.Supplier;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.Drivetrain;
@@ -42,6 +44,8 @@ public class CurvatureDrive extends CommandBase {
     {
       this.drivetrain.m_robotDrive.curvatureDrive(-forwardSpeed.get(), turnSpeed.get(), turnButton);
     }
+    SmartDashboard.putBoolean("Drivetrain/Slow Mode", isSlow);
+    SmartDashboard.putBoolean("Drivetrain/Fast Turn", turnButton);
   }
 
   // Called once the command ends or is interrupted.
@@ -56,7 +60,7 @@ public class CurvatureDrive extends CommandBase {
   
   @Override
     public boolean runsWhenDisabled() {
-        return false;
+      return false;
     }
 }
 
