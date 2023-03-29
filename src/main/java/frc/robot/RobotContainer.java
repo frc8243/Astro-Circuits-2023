@@ -35,7 +35,7 @@ public class RobotContainer {
   public static Claw m_claw;
   public static PID_ProfileArm m_arm;
   /* This line allows us to get the data from the PDH/PDP for plots/logging */
-  public static PowerDistribution pdp;
+  public static PowerDistribution m_pdp;
   /* This line is the sim arm */
   public static MechanismLigament2d armMechanism;
   /* This line creates and assigns our controller */
@@ -50,11 +50,11 @@ public class RobotContainer {
     m_navx = new NavX();
     m_claw = new Claw();
     m_arm = new PID_ProfileArm();
-    pdp = new PowerDistribution(1, ModuleType.kRev);
+    m_pdp = new PowerDistribution(1, ModuleType.kRev);
     /* This allows us to access photonvision over USB for when our radio is configured to field */
     PortForwarder.add(5800, "photonvision.local", 5800);
     /* This section puts data from pdp and m_drivetrain into shuffleboard */
-    SmartDashboard.putData(pdp);
+    SmartDashboard.putData(m_pdp);
     SmartDashboard.putData(m_drivetrain);
     configureButtonBindings();
 
@@ -64,6 +64,8 @@ public class RobotContainer {
         // be pushed : ) - Julien
         () -> xboxController1.getRawAxis(XboxConstants.kLeftStickY),
         () -> -xboxController1.getRawAxis(XboxConstants.kRightStickX)));
+    SmartDashboard.putNumber("Controls/Left Stick Y %", xboxController1.getLeftY());
+    SmartDashboard.putNumber("Controls/Right Stick X %", -xboxController1.getRightX());
 
     CommandBase onePieceBalance = new OnePieceBalance(m_drivetrain, m_claw, m_arm);
     m_chooser.addOption("onePieceBalance", onePieceBalance);
@@ -82,7 +84,7 @@ public class RobotContainer {
     return m_robotContainer;
   }
 
-  /* Button Bindings! Buttons are formatted as XboxConstants.(NAME_OF_BUTTON) */
+  /* Button Bindings! Buttons are formatted as XboxConstants.(kNameofButton) */
   private void configureButtonBindings() {
 
     new JoystickButton(xboxController1, XboxConstants.kRightBumper).whileTrue(

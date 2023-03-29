@@ -58,8 +58,10 @@ public class Drivetrain extends SubsystemBase {
         // System.out.println("in periodic");
         SmartDashboard.putNumber("Drivetrain/Left Encoder Value", leftEncoder.getPosition());
         SmartDashboard.putNumber("Drivetrain/Right Encoder Value", rightEncoder.getPosition());
-        SmartDashboard.putNumber("Drivetrain/Right Speed %", RFMotor.get());
-        SmartDashboard.putNumber("Drivetrain/Left Speed %", LFMotor.get());
+        SmartDashboard.putNumber("Drivetrain/Right Front Speed %", RFMotor.get());
+        SmartDashboard.putNumber("Drivetrain/Left Front Speed %", LFMotor.get());
+        SmartDashboard.putNumber("Drivetrain/Right Back Speed %", RBMotor.get());
+        SmartDashboard.putNumber("Drivetrain/Left Back Speed %", LBMotor.get());
         
     }
 

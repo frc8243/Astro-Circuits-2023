@@ -27,7 +27,6 @@ public class Claw extends SubsystemBase {
  
   public void setMotor(double power){
     clawMotor.set(power);
-
   }
 
   @Override
@@ -36,10 +35,6 @@ public class Claw extends SubsystemBase {
     SmartDashboard.putBoolean("Claw/Limit Out", clawLimitOut.get());
     SmartDashboard.putBoolean("Claw/Limit In", clawLimitIn.get());
     // This method will be called once per scheduler run
-
   }
-
-
-
 }
 
