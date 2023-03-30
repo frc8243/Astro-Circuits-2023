@@ -74,10 +74,10 @@ public class Constants {
         public static final double kArmMinAngle = Units.degreesToRadians(0); //TODO floor angle
         public static final double kArmMaxAngle = Units.degreesToRadians(180);
         public static final double kArmOffsetInDegrees = Units.degreesToRadians(60);
-        public static final double kArmLoadingLocation = Units.degreesToRadians(100);
+        public static final double kArmLoadingLocation = Units.degreesToRadians(107);
         public static final double kArmRestingLocation = Units.degreesToRadians(0);
         public static final double kArmScoringLocation = Units.degreesToRadians(105);
-        public static final double kArmToFloor = Units.degreesToRadians(181);
+        public static final double kArmToFloor = Units.degreesToRadians(190);
         public static final double kFeedForward = 0.133;
         public static final double kArmTolerance = Units.degreesToRadians(2);
     }
