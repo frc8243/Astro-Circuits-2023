@@ -32,6 +32,7 @@ public class AutoBalance extends CommandBase {
   @Override
   public void execute() {
     speed = BalanceConstants.kP * NavX.ahrs.getPitch();
+    speed = -speed;
     if (speed < 0) {
       speed *= BalanceConstants.kReverseMultiplier;
     }

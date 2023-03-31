@@ -42,7 +42,7 @@ public class CurvatureDrive extends CommandBase {
     }
     else
     {
-      this.drivetrain.m_robotDrive.curvatureDrive(-forwardSpeed.get(), turnSpeed.get(), turnButton);
+      this.drivetrain.m_robotDrive.curvatureDrive(-forwardSpeed.get() * DriveConstants.kFastMultiplier, turnSpeed.get() * DriveConstants.kFastMultiplier, turnButton);
     }
     SmartDashboard.putBoolean("Drivetrain/Slow Mode", isSlow);
     SmartDashboard.putBoolean("Drivetrain/Fast Turn", turnButton);

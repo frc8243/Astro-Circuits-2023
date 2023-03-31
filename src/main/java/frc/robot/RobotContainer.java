@@ -20,6 +20,10 @@ import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.XboxConstants;
 import frc.robot.Constants.clawConstants;
 import frc.robot.commands.auton.OnePieceBalance;
+import frc.robot.commands.auton.OnePieceMove;
+import frc.robot.commands.auton.AutoBalance;
+import frc.robot.commands.auton.DriveforwardBalance;
+import frc.robot.commands.auton.OnePiece;
 import frc.robot.commands.claw.SqueezyReleasy;
 import frc.robot.commands.drivetrain.CurvatureDrive;
 import frc.robot.subsystems.Claw;
@@ -50,7 +54,7 @@ public class RobotContainer {
     m_navx = new NavX();
     m_claw = new Claw();
     m_arm = new PID_ProfileArm();
-    m_pdp = new PowerDistribution(1, ModuleType.kRev);
+    m_pdp = new PowerDistribution(11, ModuleType.kRev);
     /* This allows us to access photonvision over USB for when our radio is configured to field */
     PortForwarder.add(5800, "photonvision.local", 5800);
     /* This section puts data from pdp and m_drivetrain into shuffleboard */
@@ -70,6 +74,15 @@ public class RobotContainer {
     CommandBase onePieceBalance = new OnePieceBalance(m_drivetrain, m_claw, m_arm);
     m_chooser.addOption("onePieceBalance", onePieceBalance);
 
+    CommandBase onePiece = new OnePiece(m_drivetrain, m_claw, m_arm);
+    m_chooser.addOption("onePiece", onePiece);
+
+    CommandBase onePieceMove = new OnePieceMove(m_drivetrain, m_claw, m_arm);
+    m_chooser.addOption("onePieceMove", onePieceMove);
+
+    CommandBase driveFowardbalance = new DriveforwardBalance(m_drivetrain, m_claw, m_arm);
+    m_chooser.addOption("driveFowardBalance", driveFowardbalance);
+
     SmartDashboard.putData("Auton", m_chooser);
 
     Mechanism2d mech = new Mechanism2d(1, 1);
@@ -86,6 +99,8 @@ public class RobotContainer {
 
   /* Button Bindings! Buttons are formatted as XboxConstants.(kNameofButton) */
   private void configureButtonBindings() {
+    new JoystickButton(xboxController1, XboxConstants.kStartButton).whileTrue(
+        new AutoBalance(m_drivetrain));
 
     new JoystickButton(xboxController1, XboxConstants.kRightBumper).whileTrue(
         new SqueezyReleasy(m_claw, clawConstants.kClawSpeed));
@@ -93,10 +108,10 @@ public class RobotContainer {
     new JoystickButton(xboxController1, XboxConstants.kLeftBumper).whileTrue(
         new SqueezyReleasy(m_claw, -clawConstants.kClawSpeed));
 
-    new JoystickButton(xboxController1, XboxConstants.kLeftStickClick).onTrue(
+    new JoystickButton(xboxController1, XboxConstants.kRightStickClick).onTrue(
         new InstantCommand(() -> CurvatureDrive.turnButton = !CurvatureDrive.turnButton));
 
-    new JoystickButton(xboxController1, XboxConstants.kRightStickClick).onTrue(
+    new JoystickButton(xboxController1, XboxConstants.kLeftStickClick).onTrue(
         new InstantCommand(() -> CurvatureDrive.isSlow = !CurvatureDrive.isSlow));
 
     new JoystickButton(xboxController1, XboxConstants.kAButton).onTrue(

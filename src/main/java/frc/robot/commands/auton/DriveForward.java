@@ -4,7 +4,14 @@
 
 package frc.robot.commands.auton;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
+import frc.robot.Constants.ArmConstants;
+import frc.robot.Constants.clawConstants;
+import frc.robot.commands.claw.SqueezyReleasy;
 import frc.robot.commands.drivetrain.DriveForwardGivenDistanceUsingTime;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Drivetrain;
@@ -13,14 +20,14 @@ import frc.robot.subsystems.PID_ProfileArm;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class DriveforwardBalance extends SequentialCommandGroup {
-  /** Creates a new DriveforwardBalance. */
-  public DriveforwardBalance(Drivetrain drivetrain, Claw claw, PID_ProfileArm arm) {
+public class DriveForward extends SequentialCommandGroup {
+  /** Creates a new OnePieceBalance. */
+  public DriveForward(Drivetrain drivetrain) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new DriveForwardGivenDistanceUsingTime(-3.25 , drivetrain),
-      new AutoBalance(drivetrain)
-    );
+        new DriveForwardGivenDistanceUsingTime(1,drivetrain)
+
+      );
   }
 }

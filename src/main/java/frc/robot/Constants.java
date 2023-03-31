@@ -10,7 +10,8 @@ public class Constants {
         public static final int kRightBack = 1;
         public static final int kLeftFront = 18;
         public static final int kLeftBack = 19;
-        public static final double kSlowMultiplier = 1/3.;
+        public static final double kSlowMultiplier = 0.5;
+        public static final double kFastMultiplier = 0.8;
     }
 
     // Assigns IDs to buttons on Xbox Controller
@@ -52,6 +53,7 @@ public class Constants {
     public static final class BalanceConstants {
         public static final double kP = 1/75.;
         public static final double kReverseMultiplier = 1.5;
+        public static final double kForwardMultiplier = 3.5;
     }
 
     public static final class ArmConstants{
@@ -75,7 +77,7 @@ public class Constants {
         public static final double kArmMaxAngle = Units.degreesToRadians(180);
         public static final double kArmOffsetInDegrees = Units.degreesToRadians(60);
         public static final double kArmLoadingLocation = Units.degreesToRadians(107);
-        public static final double kArmRestingLocation = Units.degreesToRadians(0);
+        public static final double kArmRestingLocation = Units.degreesToRadians(5);
         public static final double kArmScoringLocation = Units.degreesToRadians(105);
         public static final double kArmToFloor = Units.degreesToRadians(190);
         public static final double kFeedForward = 0.133;
@@ -84,7 +86,7 @@ public class Constants {
 
     public static final class clawConstants 
     {
-        public static final double kClawSpeed = 0.9;
+        public static final double kClawSpeed = 1;
         /* These next two lines correspond to DIO pins on the roboRIO */
         public static final int kOutLimitSwitch = 0;
         public static final int kInLimitSwitch = 1;
