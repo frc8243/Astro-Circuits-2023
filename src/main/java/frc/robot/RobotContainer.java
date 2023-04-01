@@ -20,10 +20,12 @@ import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.XboxConstants;
 import frc.robot.Constants.clawConstants;
 import frc.robot.commands.auton.OnePieceBalance;
-import frc.robot.commands.auton.OnePieceMove;
+import frc.robot.commands.auton.OneConeMove;
+import frc.robot.commands.auton.OneCube;
+import frc.robot.commands.auton.OneCubeMove;
 import frc.robot.commands.auton.AutoBalance;
 import frc.robot.commands.auton.DriveforwardBalance;
-import frc.robot.commands.auton.OnePiece;
+import frc.robot.commands.auton.OneCone;
 import frc.robot.commands.claw.SqueezyReleasy;
 import frc.robot.commands.drivetrain.CurvatureDrive;
 import frc.robot.subsystems.Claw;
@@ -74,11 +76,17 @@ public class RobotContainer {
     CommandBase onePieceBalance = new OnePieceBalance(m_drivetrain, m_claw, m_arm);
     m_chooser.addOption("onePieceBalance", onePieceBalance);
 
-    CommandBase onePiece = new OnePiece(m_drivetrain, m_claw, m_arm);
-    m_chooser.addOption("onePiece", onePiece);
+    CommandBase oneCone = new OneCone(m_drivetrain, m_claw, m_arm);
+    m_chooser.addOption("oneCone", oneCone);
 
-    CommandBase onePieceMove = new OnePieceMove(m_drivetrain, m_claw, m_arm);
-    m_chooser.addOption("onePieceMove", onePieceMove);
+    CommandBase oneConeMove = new OneConeMove(m_drivetrain, m_claw, m_arm);
+    m_chooser.addOption("oneConeMove", oneConeMove);
+
+    CommandBase oneCube = new OneCube(m_drivetrain, m_claw, m_arm);
+    m_chooser.addOption("oneCube", oneCube);
+
+    CommandBase oneCubeMove = new OneCubeMove(m_drivetrain, m_claw, m_arm);
+    m_chooser.addOption("oneCubeMove", oneCubeMove);
 
     CommandBase driveFowardbalance = new DriveforwardBalance(m_drivetrain, m_claw, m_arm);
     m_chooser.addOption("driveFowardBalance", driveFowardbalance);
