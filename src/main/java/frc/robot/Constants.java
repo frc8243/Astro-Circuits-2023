@@ -77,7 +77,7 @@ public class Constants {
         public static final double kArmMaxAngle = Units.degreesToRadians(180);
         public static final double kArmOffsetInDegrees = Units.degreesToRadians(60);
         public static final double kArmLoadingLocation = Units.degreesToRadians(107);
-        public static final double kArmRestingLocation = Units.degreesToRadians(5);
+        public static final double kArmRestingLocation = Units.degreesToRadians(15);
         public static final double kArmScoringLocation = Units.degreesToRadians(105);
         public static final double kArmCubeScoringLocation = Units.degreesToRadians(110);
         public static final double kArmToFloor = Units.degreesToRadians(190);
