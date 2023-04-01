@@ -79,6 +79,7 @@ public class Constants {
         public static final double kArmLoadingLocation = Units.degreesToRadians(107);
         public static final double kArmRestingLocation = Units.degreesToRadians(5);
         public static final double kArmScoringLocation = Units.degreesToRadians(105);
+        public static final double kArmCubeScoringLocation = Units.degreesToRadians(110);
         public static final double kArmToFloor = Units.degreesToRadians(190);
         public static final double kFeedForward = 0.133;
         public static final double kArmTolerance = Units.degreesToRadians(2);
