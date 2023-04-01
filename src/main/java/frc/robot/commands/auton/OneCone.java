@@ -20,9 +20,9 @@ import frc.robot.subsystems.PID_ProfileArm;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class OnePiece extends SequentialCommandGroup {
+public class OneCone extends SequentialCommandGroup {
   /** Creates a new OnePieceBalance. */
-  public OnePiece(Drivetrain drivetrain, Claw claw, PID_ProfileArm arm) {
+  public OneCone(Drivetrain drivetrain, Claw claw, PID_ProfileArm arm) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
