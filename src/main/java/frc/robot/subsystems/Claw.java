@@ -9,14 +9,16 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.clawConstants;
 
 public class Claw extends SubsystemBase {
   SlewRateLimiter filter;
 
-  private CANSparkMax clawMotor = new CANSparkMax(9, MotorType.kBrushed);
-  public DigitalInput clawLimitOut = new DigitalInput(0);
-  public DigitalInput clawLimitIn = new DigitalInput(1);
+  private CANSparkMax clawMotor = new CANSparkMax(clawConstants.kClawMotor, MotorType.kBrushed);
+  public DigitalInput clawLimitOut = new DigitalInput(clawConstants.kOutLimitSwitch);
+  public DigitalInput clawLimitIn = new DigitalInput(clawConstants.kInLimitSwitch);
   /** Creates a new Claw. */
   public Claw() {
     clawMotor.restoreFactoryDefaults();
@@ -25,16 +27,14 @@ public class Claw extends SubsystemBase {
  
   public void setMotor(double power){
     clawMotor.set(power);
-
   }
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("Claw/Power %", clawMotor.get());
+    SmartDashboard.putBoolean("Claw/Limit Out", clawLimitOut.get());
+    SmartDashboard.putBoolean("Claw/Limit In", clawLimitIn.get());
     // This method will be called once per scheduler run
-
   }
-
-
-
 }
 

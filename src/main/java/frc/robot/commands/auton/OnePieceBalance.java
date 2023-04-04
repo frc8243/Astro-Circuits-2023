@@ -2,15 +2,17 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.auton;
 
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.Constants.ArmConstants;
+import frc.robot.Constants.clawConstants;
+import frc.robot.commands.claw.SqueezyReleasy;
+import frc.robot.commands.drivetrain.DriveForwardGivenDistanceUsingTime;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.PID_ProfileArm;
@@ -33,19 +35,20 @@ public class OnePieceBalance extends SequentialCommandGroup {
             },
           arm),
       new WaitUntilCommand(() -> arm.atGoal()),
-      new WaitCommand(0.5),
-      new SqueezyReleasy(claw, -0.9).withTimeout(0.5),
+      new WaitCommand(1.5),
+      new SqueezyReleasy(claw, -clawConstants.kClawSpeed).withTimeout(0.75),
+      // new PrintCommand("Arm reached resting position"),
+      new DriveForwardGivenDistanceUsingTime(-3 , drivetrain), //This number is in meters
+      new PrintCommand("Got past Drive Forward Given Distnace"),
+      //new DriveForwardGivenDistanceUsingTime(1.5 , drivetrain),
+      new AutoBalance(drivetrain),
       new InstantCommand( // Sets arm down to score
-          () -> {
-            arm.setGoal(ArmConstants.kArmRestingLocation);
-            arm.enable();
-            // System.out.println("Back Pressed");
-            },
-          arm),
-      new WaitUntilCommand(() -> arm.atGoal()),
-      new PrintCommand("Arm reached resting position"),
-      new DriveForwardGivenDistanceUsingTime(-1 , drivetrain), //This number is in meters
-      new PrintCommand("Got past Drive Forward Given Distnace")
-      );
+      () -> {
+        arm.setGoal(ArmConstants.kArmRestingLocation);
+        arm.enable();
+        // System.out.println("Back Pressed");
+        },
+      arm)
+      ); 
   }
 }

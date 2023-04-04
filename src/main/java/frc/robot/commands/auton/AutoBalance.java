@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.auton;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.BalanceConstants;
@@ -31,9 +31,10 @@ public class AutoBalance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    speed = BalanceConstants.kP * NavX.ahrs.getPitch(); //TODO : get correct roll/yaw/pitch thing
+    speed = BalanceConstants.kP * NavX.ahrs.getPitch();
+    speed = -speed;
     if (speed < 0) {
-      speed *= BalanceConstants.REVERSE_POWER_MULTIPLIER;
+      speed *= BalanceConstants.kReverseMultiplier;
     }
     if (Math.abs(speed) > 0.4) {
       speed = Math.copySign(0.4, speed);

@@ -2,9 +2,11 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.drivetrain;
 
 import java.util.function.Supplier;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.Drivetrain;
@@ -36,12 +38,14 @@ public class CurvatureDrive extends CommandBase {
   public void execute() {
     if (isSlow) 
     {
-      this.drivetrain.m_robotDrive.curvatureDrive(-forwardSpeed.get() * DriveConstants.SLOW_SPEED_FRACTION, turnSpeed.get() * DriveConstants.SLOW_SPEED_FRACTION, turnButton);
+      this.drivetrain.m_robotDrive.curvatureDrive(-forwardSpeed.get() * DriveConstants.kSlowMultiplier, turnSpeed.get() * DriveConstants.kSlowMultiplier, turnButton);
     }
     else
     {
-      this.drivetrain.m_robotDrive.curvatureDrive(-forwardSpeed.get(), turnSpeed.get(), turnButton);
+      this.drivetrain.m_robotDrive.curvatureDrive(-forwardSpeed.get() * DriveConstants.kFastMultiplier, turnSpeed.get() * DriveConstants.kFastMultiplier, turnButton);
     }
+    SmartDashboard.putBoolean("Drivetrain/Slow Mode", isSlow);
+    SmartDashboard.putBoolean("Drivetrain/Fast Turn", turnButton);
   }
 
   // Called once the command ends or is interrupted.
@@ -56,7 +60,7 @@ public class CurvatureDrive extends CommandBase {
   
   @Override
     public boolean runsWhenDisabled() {
-        return false;
+      return false;
     }
 }
 

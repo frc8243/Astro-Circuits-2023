@@ -107,11 +107,10 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
     // sets our simulated encoder speeds
 
     // SmartDashboard.putNumber("arm angle", armSim.getAngleRads());
-    SmartDashboard.putNumber("armGoal", m_controller.getGoal().position);
-    SmartDashboard.putNumber("armVoltage", speed);
-    SmartDashboard.putNumber("armMotor", armMotor.get());
-    SmartDashboard.putNumber("armSpeed", speed);
-    SmartDashboard.putNumber("ArmEncoderPosition", getMeasurement());
+    SmartDashboard.putNumber("Arm/Goal r", m_controller.getGoal().position);
+    SmartDashboard.putNumber("Arm/Voltage V", speed);
+    SmartDashboard.putNumber("Arm/Motor %", armMotor.get());
+    SmartDashboard.putNumber("Arm/EncoderPosition r", getMeasurement());
 
     // System.out.println("Non-Sim Arm System is live!");
   }
