@@ -11,6 +11,16 @@
           "open": true
         }
       },
+      "SPARK MAX [18]": {
+        "header": {
+          "open": true
+        }
+      },
+      "SPARK MAX [19]": {
+        "header": {
+          "open": true
+        }
+      },
       "Victor SPX[0]": {
         "header": {
           "open": true
@@ -33,6 +43,9 @@
       }
     },
     "RoboRIO": {
+      "RoboRIO Input": {
+        "open": true
+      },
       "window": {
         "visible": true
       }

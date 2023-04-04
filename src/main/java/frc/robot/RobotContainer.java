@@ -24,6 +24,7 @@ import frc.robot.commands.auton.OneConeMove;
 import frc.robot.commands.auton.OneCube;
 import frc.robot.commands.auton.OneCubeMove;
 import frc.robot.commands.auton.AutoBalance;
+import frc.robot.commands.auton.DriveForwardUniBalance;
 import frc.robot.commands.auton.DriveforwardBalance;
 import frc.robot.commands.auton.OneCone;
 import frc.robot.commands.claw.SqueezyReleasy;
@@ -74,6 +75,10 @@ public class RobotContainer {
     SmartDashboard.putNumber("Controls/Left Stick Y %", xboxController1.getLeftY());
     SmartDashboard.putNumber("Controls/Right Stick X %", -xboxController1.getRightX());
 
+
+    //-------------------------------------------------------------------------------------
+    // Auton Commands
+    //-------------------------------------------------------------------------------------
     CommandBase onePieceBalance = new OnePieceBalance(m_drivetrain, m_claw, m_arm);
     m_chooser.addOption("onePieceBalance", onePieceBalance);
 
@@ -91,6 +96,9 @@ public class RobotContainer {
 
     CommandBase driveFowardbalance = new DriveforwardBalance(m_drivetrain, m_claw, m_arm);
     m_chooser.addOption("driveFowardBalance", driveFowardbalance);
+    
+    CommandBase driveForwardUniBalance = new DriveForwardUniBalance(m_drivetrain, m_claw, m_arm);
+    m_chooser.addOption("uniBalance", driveForwardUniBalance);
 
     SmartDashboard.putData("Auton", m_chooser);
 

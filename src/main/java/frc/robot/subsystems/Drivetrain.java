@@ -6,6 +6,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxRelativeEncoder.Type;
 
+import edu.wpi.first.math.filter.LinearFilter;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -70,6 +71,8 @@ public class Drivetrain extends SubsystemBase {
         SmartDashboard.putNumber("Drivetrain/Left Front Speed %", LFMotor.get());
         SmartDashboard.putNumber("Drivetrain/Right Back Speed %", RBMotor.get());
         SmartDashboard.putNumber("Drivetrain/Left Back Speed %", LBMotor.get());
+
+        SmartDashboard.putNumber("NavX/pitchRate", pitchRate);
         
     }
 
@@ -84,8 +87,14 @@ public class Drivetrain extends SubsystemBase {
         RFMotor.set(rightSpeed);
        
     }
+    
     public double getGyroPitch() {
-        return driveIO.getGyroPitch();
+        return NavX.ahrs.getPitch();
+    }
+
+    public double getGyroPitchRate()
+    {
+        return pitchRate;
     }
 
 
