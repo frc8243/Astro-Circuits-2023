@@ -21,6 +21,10 @@ public class Drivetrain extends SubsystemBase {
     public final RelativeEncoder rightEncoder = RFMotor.getEncoder(Type.kQuadrature, 8192);
     public final DifferentialDrive m_robotDrive = new DifferentialDrive(LFMotor, RFMotor);
 
+    //2399 code for balance
+    private double pitchRate;
+    private LinearFilter derivativeCalculator = LinearFilter.backwardFiniteDifference(1, 2, 0.02);
+
 
     public Drivetrain() {
         /* Restore defaults to clear any possible errors*/
@@ -56,6 +60,10 @@ public class Drivetrain extends SubsystemBase {
         // SmartDashboard.putNumber("leftSpeed", );
         // SmartDashboard.putNumber("rightSpeed", RBMotor.getMotorOutputPercent());
         // System.out.println("in periodic");
+
+        pitchRate = derivativeCalculator.calculate(getGyroPitch());
+
+
         SmartDashboard.putNumber("Drivetrain/Left Encoder Value", leftEncoder.getPosition());
         SmartDashboard.putNumber("Drivetrain/Right Encoder Value", rightEncoder.getPosition());
         SmartDashboard.putNumber("Drivetrain/Right Front Speed %", RFMotor.get());
@@ -75,8 +83,10 @@ public class Drivetrain extends SubsystemBase {
         LFMotor.set(leftSpeed);
         RFMotor.set(rightSpeed);
        
-
-
     }
+    public double getGyroPitch() {
+        return driveIO.getGyroPitch();
+    }
+
 
 }
