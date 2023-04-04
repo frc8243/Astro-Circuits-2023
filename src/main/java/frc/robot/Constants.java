@@ -51,9 +51,9 @@ public class Constants {
     }
 
     public static final class BalanceConstants {
-        public static final double kP = 1/75.;
-        public static final double kReverseMultiplier = 1.5;
-        public static final double kForwardMultiplier = 3.5;
+        public static final double kP = 1/57.;
+        public static final double kReverseMultiplier = 1.25;
+        public static final double kForwardMultiplier = 5;
     }
 
     public static final class ArmConstants{
@@ -79,7 +79,7 @@ public class Constants {
         public static final double kArmLoadingLocation = Units.degreesToRadians(107);
         public static final double kArmRestingLocation = Units.degreesToRadians(15);
         public static final double kArmScoringLocation = Units.degreesToRadians(105);
-        public static final double kArmCubeScoringLocation = Units.degreesToRadians(110);
+        public static final double kArmCubeScoringLocation = Units.degreesToRadians(106.5);
         public static final double kArmToFloor = Units.degreesToRadians(190);
         public static final double kFeedForward = 0.133;
         public static final double kArmTolerance = Units.degreesToRadians(2);

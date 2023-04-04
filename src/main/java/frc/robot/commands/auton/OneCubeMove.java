@@ -25,16 +25,17 @@ public class OneCubeMove extends SequentialCommandGroup {
   public OneCubeMove(Drivetrain drivetrain, Claw claw, PID_ProfileArm arm) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new InstantCommand( // Sets arm down to score
-        () -> {
-          arm.setGoal(ArmConstants.kArmCubeScoringLocation);
-          arm.enable();
-          // System.out.println("Back Pressed");
-        },
-        arm),
+    addCommands(
+        new InstantCommand( // Sets arm down to score
+          () -> {
+            arm.setGoal(ArmConstants.kArmCubeScoringLocation);
+            arm.enable();
+            // System.out.println("Back Pressed");
+          },
+          arm),
         new WaitUntilCommand(() -> arm.atGoal()),
         new WaitCommand(3),
-        new SqueezyReleasy(claw, -clawConstants.kClawSpeed).withTimeout(0.5),
+        new SqueezyReleasy(claw, -clawConstants.kClawSpeed).withTimeout(0.75),
         new InstantCommand( // Sets arm down to score
             () -> {
               arm.setGoal(ArmConstants.kArmRestingLocation);
@@ -43,9 +44,10 @@ public class OneCubeMove extends SequentialCommandGroup {
             },
             arm),
         new WaitUntilCommand(() -> arm.atGoal()),
-        new PrintCommand("Arm reached resting position"),
-        new DriveForwardGivenDistanceUsingTime(-4.25, drivetrain), // This number is in meters
-        new PrintCommand("Got past Drive Forward Given Distnace"));
+        new PrintCommand("Arm reached resting position")
+        //new DriveForwardGivenDistanceUsingTime(-4.25, drivetrain), // This number is in meters
+        //new PrintCommand("Got past Drive Forward Given Distnace")
+        );
     ;
   }
 }
