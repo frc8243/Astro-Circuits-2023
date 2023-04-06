@@ -19,9 +19,10 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.XboxConstants;
 import frc.robot.Constants.clawConstants;
-import frc.robot.commands.auton.OnePieceBalance;
+import frc.robot.commands.auton.OneConeBalance;
 import frc.robot.commands.auton.OneConeMove;
 import frc.robot.commands.auton.OneCube;
+import frc.robot.commands.auton.OneCubeBalance;
 import frc.robot.commands.auton.OneCubeMove;
 import frc.robot.commands.auton.AutoBalance;
 import frc.robot.commands.auton.DriveForwardUniBalance;
@@ -79,9 +80,12 @@ public class RobotContainer {
     //-------------------------------------------------------------------------------------
     // Auton Commands
     //-------------------------------------------------------------------------------------
-    CommandBase onePieceBalance = new OnePieceBalance(m_drivetrain, m_claw, m_arm);
-    m_chooser.addOption("onePieceBalance", onePieceBalance);
+    CommandBase oneConeBalance = new OneConeBalance(m_drivetrain, m_claw, m_arm);
+    m_chooser.addOption("oneConeBalance", oneConeBalance);
 
+    CommandBase oneCubeBalance = new OneCubeBalance(m_drivetrain, m_claw, m_arm);
+    m_chooser.addOption("oneCubeBalance", oneCubeBalance);
+    
     CommandBase oneCone = new OneCone(m_drivetrain, m_claw, m_arm);
     m_chooser.addOption("oneCone", oneCone);
 
