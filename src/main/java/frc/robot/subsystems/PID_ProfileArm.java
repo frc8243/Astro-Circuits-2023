@@ -156,4 +156,8 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
   public boolean atGoal() {
     return Math.abs(getMeasurement() - getGoal()) <= ArmConstants.kArmTolerance;
   }
+
+  public void setMotor(double power) {
+    armMotor.set(power);
+  }
 }
