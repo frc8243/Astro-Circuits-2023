@@ -11,7 +11,8 @@ public class Constants {
         public static final int kLeftFront = 18;
         public static final int kLeftBack = 19;
         public static final double kSlowMultiplier = 0.5;
-        public static final double kFastMultiplier = 1;
+        public static final double kFastMultiplier = 1
+        ;
     }
 
     // Assigns IDs to buttons on Xbox Controller
@@ -76,11 +77,11 @@ public class Constants {
         public static final double kArmMinAngle = Units.degreesToRadians(0); //TODO floor angle
         public static final double kArmMaxAngle = Units.degreesToRadians(180);
         public static final double kArmOffsetInDegrees = Units.degreesToRadians(60);
-        public static final double kArmLoadingLocation = Units.degreesToRadians(101);
+        public static final double kArmLoadingLocation = Units.degreesToRadians(102);
         public static final double kArmRestingLocation = Units.degreesToRadians(15);
-        public static final double kArmScoringLocation = Units.degreesToRadians(103);
-        public static final double kArmCubeScoringLocation = Units.degreesToRadians(107);
-        public static final double kArmToFloor = Units.degreesToRadians(190);
+        public static final double kArmScoringLocation = Units.degreesToRadians(104.5);
+        public static final double kArmCubeScoringLocation = Units.degreesToRadians(104);
+        public static final double kArmToFloor = Units.degreesToRadians(185);
         public static final double kFeedForward = 0.133;
         public static final double kArmTolerance = Units.degreesToRadians(2);
     }

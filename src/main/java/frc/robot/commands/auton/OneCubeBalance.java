@@ -33,21 +33,21 @@ public class OneCubeBalance extends SequentialCommandGroup {
             // System.out.println("Back Pressed");
             },
           arm),
-      new WaitUntilCommand(() -> arm.atGoal()),
+      new WaitUntilCommand(() -> arm.atGoal()).withTimeout(4),
       new WaitCommand(1.5),
       new SqueezyReleasy(claw, -clawConstants.kClawSpeed).withTimeout(0.75),
       // new PrintCommand("Arm reached resting position"),
       new DriveForwardGivenDistanceUsingTime(-3 , drivetrain), //This number is in meters
       new PrintCommand("Got past Drive Forward Given Distnace"),
       //new DriveForwardGivenDistanceUsingTime(1.5 , drivetrain),
-      new AutoBalance(drivetrain),
-      new InstantCommand( // Sets arm down to score
-      () -> {
-        arm.setGoal(ArmConstants.kArmRestingLocation);
-        arm.enable();
-        // System.out.println("Back Pressed");
-        },
-      arm)
+      new AutoBalance(drivetrain)
+      // new InstantCommand( // Sets arm down to score
+      // () -> {
+      //   arm.setGoal(ArmConstants.kArmRestingLocation);
+      //   arm.enable();
+      //   // System.out.println("Back Pressed");
+      //   },
+      // arm)
       ); 
   }
 }

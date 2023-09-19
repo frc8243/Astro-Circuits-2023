@@ -31,7 +31,7 @@ public class OneCube extends SequentialCommandGroup {
       // System.out.println("Back Pressed");
       },
     arm),
-new WaitUntilCommand(() -> arm.atGoal()),
+new WaitUntilCommand(() -> arm.atGoal()).withTimeout(4),
 new WaitCommand(3),
 new SqueezyReleasy(claw, -clawConstants.kClawSpeed).withTimeout(0.5),
 new InstantCommand( // Sets arm down to score
