@@ -4,7 +4,7 @@ import edu.wpi.first.math.util.Units;
 //EndImports
 public class Constants {
     
-    // Assigns IDs to Motors
+    // Assigns CAN IDs to Motors
     public static final class DriveConstants {
         public static final int kRightFront = 2;
         public static final int kRightBack = 1;
@@ -14,7 +14,7 @@ public class Constants {
         public static final double kFastMultiplier = 1;
     }
 
-    // Assigns IDs to buttons on Xbox Controller
+    // Assigns CAN IDs to buttons on Xbox Controller
     public static final class XboxConstants {
         public static final int kLeftTrigger = 2;
         public static final int kRightTrigger = 3;
@@ -56,7 +56,7 @@ public class Constants {
         public static final double kForwardMultiplier = 5;
     }
 
-    public static final class ArmConstants{
+    public static final class ArmConstants {
         public static final double kP = 10;
         public static final double kI = 0.0;
         public static final double kD = 0.1;
@@ -73,7 +73,7 @@ public class Constants {
         public static final double kArmOffsetRads = 0;
         public static final double kArmLength = Units.inchesToMeters(30);
         public static final double kArmMass = Units.lbsToKilograms(10);
-        public static final double kArmMinAngle = Units.degreesToRadians(0); //TODO floor angle
+        public static final double kArmMinAngle = Units.degreesToRadians(0);
         public static final double kArmMaxAngle = Units.degreesToRadians(180);
         public static final double kArmOffsetInDegrees = Units.degreesToRadians(60);
         public static final double kArmLoadingLocation = Units.degreesToRadians(101);
@@ -83,6 +83,7 @@ public class Constants {
         public static final double kArmToFloor = Units.degreesToRadians(190);
         public static final double kFeedForward = 0.133;
         public static final double kArmTolerance = Units.degreesToRadians(2);
+        public static final double kArmManualSpeed = 0.5;
     }
 
     public static final class clawConstants 
