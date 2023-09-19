@@ -48,6 +48,7 @@ public class SqueezyReleasy extends CommandBase {
       }
     } 
     else {
+      /* This should never happen, power would have to be zero when command is called */
       System.out.println("Something is horribly wrong.");
     }
 

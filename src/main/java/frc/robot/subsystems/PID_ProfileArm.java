@@ -25,7 +25,7 @@ import frc.robot.util.SimEncoder;
 public class PID_ProfileArm extends ProfiledPIDSubsystem {
 
   public CANSparkMax armMotor = new CANSparkMax(ArmConstants.kArmMotor, MotorType.kBrushless);
-  private final RelativeEncoder m_encoder = armMotor.getEncoder();
+  public final RelativeEncoder m_encoder = armMotor.getEncoder();
   private final ArmFeedforward m_feedforward = new ArmFeedforward(
       ArmConstants.kSVolts, ArmConstants.kGVolts,
       ArmConstants.kVVoltSecondPerRad, ArmConstants.kAVoltSecondSquaredPerRad);
@@ -155,5 +155,9 @@ public class PID_ProfileArm extends ProfiledPIDSubsystem {
 
   public boolean atGoal() {
     return Math.abs(getMeasurement() - getGoal()) <= ArmConstants.kArmTolerance;
+  }
+
+  public void setMotor(double power) {
+    armMotor.set(power);
   }
 }
