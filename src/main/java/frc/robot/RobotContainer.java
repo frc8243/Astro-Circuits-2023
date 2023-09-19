@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.XboxConstants;
 import frc.robot.Constants.clawConstants;
@@ -172,20 +173,29 @@ public class RobotContainer {
               System.out.println("X Pressed");
             },
             m_arm));
-
-    new JoystickButton(xboxController2, XboxConstants.kStartButton).onTrue(
+          
+    // Manual Arm Constrols
+    new POVButton(xboxController2,90).onTrue(
       Commands.runOnce(
         () -> {
           m_arm.disable();
         },
         m_arm));
-
-    new JoystickButton(xboxController2, XboxConstants.kRightTrigger).whileTrue(
+      
+    new POVButton(xboxController2, 0).whileTrue(
       new LiftyDroppy(m_arm, ArmConstants.kArmManualSpeed));
+      
     
-    new JoystickButton(xboxController2, XboxConstants.kLeftTrigger).whileTrue(
+    new POVButton(xboxController2, 180).whileTrue( 
       new LiftyDroppy(m_arm, -ArmConstants.kArmManualSpeed));
       
+    new POVButton(xboxController2, 270).onTrue(
+      Commands.runOnce(
+        () -> { //Manual Reset for Arm Zero Position
+          m_arm.m_encoder.setPosition(0);
+        }
+      )
+    );
     
   }
 
