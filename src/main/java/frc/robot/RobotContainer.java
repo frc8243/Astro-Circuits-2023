@@ -175,21 +175,21 @@ public class RobotContainer {
             m_arm));
           
     // Manual Arm Constrols
-    new POVButton(xboxController2,90).onTrue(
+    new POVButton(xboxController1,90).onTrue(
       Commands.runOnce(
         () -> {
           m_arm.disable();
         },
         m_arm));
       
-    new POVButton(xboxController2, 0).whileTrue(
+    new POVButton(xboxController1, 0).whileTrue(
       new LiftyDroppy(m_arm, ArmConstants.kArmManualSpeed));
       
     
-    new POVButton(xboxController2, 180).whileTrue( 
+    new POVButton(xboxController1, 180).whileTrue( 
       new LiftyDroppy(m_arm, -ArmConstants.kArmManualSpeed));
       
-    new POVButton(xboxController2, 270).onTrue(
+    new POVButton(xboxController1, 270).onTrue(
       Commands.runOnce(
         () -> { //Manual Reset for Arm Zero Position
           m_arm.m_encoder.setPosition(0);
