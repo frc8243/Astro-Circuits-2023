@@ -36,6 +36,7 @@ import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.NavX;
 import frc.robot.subsystems.PID_ProfileArm;
+import frc.robot.subsystems.Vision;
 
 public class RobotContainer {
   private static RobotContainer m_robotContainer = new RobotContainer();
@@ -122,8 +123,8 @@ public class RobotContainer {
 
   /* Button Bindings! Buttons are formatted as XboxConstants.(kNameofButton) */
   private void configureButtonBindings() {
-    new JoystickButton(xboxController1, XboxConstants.kStartButton).whileTrue(
-        new AutoBalance(m_drivetrain));
+    new JoystickButton(xboxController1, XboxConstants.kStartButton).onTrue(
+        new InstantCommand( () -> Vision.LLtoggleLights()));
 
     new JoystickButton(xboxController2, XboxConstants.kRightBumper).whileTrue(
         new SqueezyReleasy(m_claw, clawConstants.kClawSpeed));
@@ -193,6 +194,8 @@ public class RobotContainer {
       Commands.runOnce(
         () -> { //Manual Reset for Arm Zero Position
           m_arm.m_encoder.setPosition(0);
+          m_arm.setGoal(ArmConstants.kArmRestingLocation);
+ 
         }
       )
     );
