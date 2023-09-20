@@ -1,17 +1,15 @@
 package frc.robot.commands.drivetrain;
 
-import org.photonvision.PhotonCamera;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.PIDConstants;
+import frc.robot.Constants.VisionConstants;
+import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.Drivetrain;
 
 
 // End Imports
 
 public class MoveToTarget extends CommandBase {
-    PhotonCamera camera = new PhotonCamera("LIMELIGHT");
     double forwardSpeed;
     PIDController moveController;
     double distanceToTarget;
@@ -25,26 +23,23 @@ public class MoveToTarget extends CommandBase {
 
     @Override
     public void initialize() {
-        moveController = new PIDController(PIDConstants.LINEAR_P, 0, PIDConstants.LINEAR_D);
+        moveController = new PIDController(VisionConstants.kMovingP, 0, VisionConstants.kMovingD);
     }
 
     public void execute() {
-        var result = camera.getLatestResult();
+        var result = Vision.limelight.getLatestResult();
         if (result.hasTargets()) {
             System.out.println("Distance to target = " + distanceToTarget);
-            
             forwardSpeed = moveController.calculate(result.getBestTarget().getBestCameraToTarget().getX(), distanceToTarget);
-            System.out.println("forawrd speed = " + forwardSpeed);
-        } else {
+            System.out.println("forward speed = " + forwardSpeed);
+        } 
+        else {
             forwardSpeed = 0;
         }
-        this.drivetrain.m_robotDrive.arcadeDrive(forwardSpeed,0);
+        this.drivetrain.m_robotDrive.curvatureDrive(forwardSpeed,0,true);
     }
 
     public void end(boolean interrupted) {
-        this.drivetrain.m_robotDrive.arcadeDrive(0, 0);
-
-
-
+        this.drivetrain.m_robotDrive.curvatureDrive(0,0,false);
     }
 }

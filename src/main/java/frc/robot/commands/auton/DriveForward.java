@@ -4,18 +4,9 @@
 
 package frc.robot.commands.auton;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
-import frc.robot.Constants.ArmConstants;
-import frc.robot.Constants.clawConstants;
-import frc.robot.commands.claw.SqueezyReleasy;
 import frc.robot.commands.drivetrain.DriveForwardGivenDistanceUsingTime;
-import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.PID_ProfileArm;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:

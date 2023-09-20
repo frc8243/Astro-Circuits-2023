@@ -14,16 +14,17 @@ public class Vision extends SubsystemBase {
   /** Creates a new Limelight. */
   public final static PhotonCamera limelight = new PhotonCamera("limelight");
   public final static PhotonCamera frontCam = new PhotonCamera("frontCam"); 
-  public final static PhotonCamera backCam = new PhotonCamera("backCam"); 
+  public final static PhotonCamera armCam = new PhotonCamera("armCam"); 
 
   public Vision() {
     limelight.setLED(VisionLEDMode.kOff);
+    armCam.setDriverMode(true);
+    frontCam.setDriverMode(true);
     
   }
 
   @Override
-  public void periodic()
-  {
+  public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putBoolean("Vision/Limelight Connected",limelight.isConnected());
     SmartDashboard.putBoolean("Vision/RaspPi Connected",frontCam.isConnected());
@@ -37,7 +38,7 @@ public class Vision extends SubsystemBase {
     else if (limelight.getLEDMode() == VisionLEDMode.kOff) {
       limelight.setLED(VisionLEDMode.kOn);
     }
-   
+  
   }
 
   public static void toggleDriverMode() {
