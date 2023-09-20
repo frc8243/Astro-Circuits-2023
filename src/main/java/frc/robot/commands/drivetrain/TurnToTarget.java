@@ -6,11 +6,11 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.PIDConstants;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Vision;
 
 // End Imports
 
 public class TurnToTarget extends CommandBase {
-    PhotonCamera camera = new PhotonCamera("LIMELIGHT");
     double turnSpeed;
     PIDController turnController;
     private final Drivetrain drivetrain;
@@ -31,7 +31,7 @@ public class TurnToTarget extends CommandBase {
     @Override
     public void execute() {
         // System.out.println(LocalTime.now()); Use this to find loop speed >: )
-        var result = camera.getLatestResult();
+        var result = Vision.limelight.getLatestResult();
         if (result.hasTargets()) {
             turnSpeed = turnController.calculate(result.getBestTarget().getYaw(), 0);
             System.out.println(turnSpeed + " Turn Speed");
@@ -45,7 +45,7 @@ public class TurnToTarget extends CommandBase {
             turnSpeed = 0;
             WITHIN_TARGET_RANGE = true;
         }
-        this.drivetrain.m_robotDrive.arcadeDrive(0, turnSpeed);
+        this.drivetrain.m_robotDrive.curvatureDrive(0, turnSpeed, true);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class TurnToTarget extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        this.drivetrain.m_robotDrive.arcadeDrive(0, 0);
+        this.drivetrain.m_robotDrive.curvatureDrive(0, 0, false);
 
     }
 
