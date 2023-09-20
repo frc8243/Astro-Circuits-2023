@@ -26,25 +26,25 @@ public class OneCubeMove extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        // new InstantCommand( // Sets arm down to score
-        //   () -> {
-        //     arm.setGoal(ArmConstants.kArmCubeScoringLocation);
-        //     arm.enable();
-        //     // System.out.println("Back Pressed");
-        //   },
-        //   arm),
-        // new WaitUntilCommand(() -> arm.atGoal()).withTimeout(4),
-        // new WaitCommand(3),
-        // new SqueezyReleasy(claw, -clawConstants.kClawSpeed).withTimeout(0.75),
-        // new InstantCommand( // Sets arm down to score
-        //     () -> {
-        //       arm.setGoal(ArmConstants.kArmRestingLocation);
-        //       arm.enable();
-        //       // System.out.println("Back Pressed");
-        //     },
-        //     arm),
-        // new WaitUntilCommand(() -> arm.atGoal()),
-        // new PrintCommand("Arm reached resting position"),
+        new InstantCommand( // Sets arm down to score
+          () -> {
+            arm.setGoal(ArmConstants.kArmCubeScoringLocation);
+            arm.enable();
+            // System.out.println("Back Pressed");
+          },
+          arm),
+        new WaitUntilCommand(() -> arm.atGoal()).withTimeout(4),
+        new WaitCommand(3),
+        new SqueezyReleasy(claw, -clawConstants.kClawSpeed).withTimeout(0.75),
+        new InstantCommand( // Sets arm down to score
+            () -> {
+              arm.setGoal(ArmConstants.kArmRestingLocation);
+              arm.enable();
+              // System.out.println("Back Pressed");
+            },
+            arm),
+        new WaitUntilCommand(() -> arm.atGoal()),
+        new PrintCommand("Arm reached resting position"),
         new DriveForwardGivenDistanceUsingTime(-4.25, drivetrain), // This number is in meters
         new PrintCommand("Got past Drive Forward Given Distnace")
         );
