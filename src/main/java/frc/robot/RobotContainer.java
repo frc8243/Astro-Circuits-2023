@@ -20,17 +20,8 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.XboxConstants;
 import frc.robot.Constants.clawConstants;
-import frc.robot.commands.auton.OneConeBalance;
-import frc.robot.commands.auton.OneConeMove;
-import frc.robot.commands.auton.OneCube;
-import frc.robot.commands.auton.OneCubeBalance;
-import frc.robot.commands.auton.OneCubeMove;
 import frc.robot.commands.arm.LiftyDroppy;
-import frc.robot.commands.auton.AutoBalance;
-import frc.robot.commands.auton.BackUp;
-import frc.robot.commands.auton.DriveForwardUniBalance;
-import frc.robot.commands.auton.DriveforwardBalance;
-import frc.robot.commands.auton.OneCone;
+import frc.robot.commands.auton.*;
 import frc.robot.commands.claw.SqueezyReleasy;
 import frc.robot.commands.drivetrain.CurvatureDrive;
 import frc.robot.commands.drivetrain.TurnToTarget;
@@ -47,11 +38,12 @@ public class RobotContainer {
   public static NavX m_navx;
   public static Claw m_claw;
   public static PID_ProfileArm m_arm;
+  public static Vision m_vision;
   /* This line allows us to get the data from the PDH/PDP for plots/logging */
   public static PowerDistribution m_pdp;
   /* This line is the sim arm */
   public static MechanismLigament2d armMechanism;
-  /* This line creates and assigns our controller */
+  /* This line creates and assigns our controllers */
   private final XboxController xboxController1 = new XboxController(0);
   private final XboxController xboxController2 = new XboxController(1);
   // Autonomous Position Chooser
@@ -65,6 +57,7 @@ public class RobotContainer {
     m_claw = new Claw();
     m_arm = new PID_ProfileArm();
     m_pdp = new PowerDistribution(11, ModuleType.kRev);
+    m_vision = new Vision();
     /* This allows us to access photonvision over USB for when our radio is configured to field */
     PortForwarder.add(5800, "limelight.local", 5800);
     PortForwarder.add(5800, "rasppi.local", 5800);
@@ -127,8 +120,8 @@ public class RobotContainer {
 
   /* Button Bindings! Buttons are formatted as XboxConstants.(kNameofButton) */
   private void configureButtonBindings() {
-    new JoystickButton(xboxController1, XboxConstants.kAButton).onTrue(
-        new TurnToTarget(m_drivetrain));
+    // new JoystickButton(xboxController1, XboxConstants.kAButton).onTrue(
+    //     new TurnToTarget(m_drivetrain));
 
     new JoystickButton(xboxController2, XboxConstants.kRightBumper).whileTrue(
         new SqueezyReleasy(m_claw, clawConstants.kClawSpeed));
