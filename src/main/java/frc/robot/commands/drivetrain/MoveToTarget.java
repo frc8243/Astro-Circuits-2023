@@ -27,16 +27,16 @@ public class MoveToTarget extends CommandBase {
     }
 
     public void execute() {
-        var result = Vision.limelight.getLatestResult();
-        if (result.hasTargets()) {
-            System.out.println("Distance to target = " + distanceToTarget);
-            forwardSpeed = moveController.calculate(result.getBestTarget().getBestCameraToTarget().getX(), distanceToTarget);
-            System.out.println("forward speed = " + forwardSpeed);
-        } 
-        else {
-            forwardSpeed = 0;
-        }
-        this.drivetrain.m_robotDrive.curvatureDrive(forwardSpeed,0,true);
+        // var result = Vision.limelight.getLatestResult();
+        // if (result.hasTargets()) {
+        //     System.out.println("Distance to target = " + distanceToTarget);
+        //     forwardSpeed = moveController.calculate(result.getBestTarget().getBestCameraToTarget().getX(), distanceToTarget);
+        //     System.out.println("forward speed = " + forwardSpeed);
+        // } 
+        // else {
+        //     forwardSpeed = 0;
+        // }
+        // this.drivetrain.m_robotDrive.curvatureDrive(forwardSpeed,0,true);
     }
 
     public void end(boolean interrupted) {

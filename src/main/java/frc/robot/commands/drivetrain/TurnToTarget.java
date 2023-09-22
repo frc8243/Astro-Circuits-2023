@@ -31,22 +31,7 @@ public class TurnToTarget extends CommandBase {
     @Override
     public void execute() {
         // System.out.println(LocalTime.now()); Use this to find loop speed >: )
-        var result = Vision.limelight.getLatestResult();
-        if (result.hasTargets()) {
-            turnSpeed = turnController.calculate(result.getBestTarget().getYaw(), 0);
-            SmartDashboard.putNumber("Turn Speed", turnSpeed);
-            if (Math.abs(turnSpeed) <= 0.001) {
-                withinTargetRange = true;
-            } 
-            else {
-                withinTargetRange = false;
-            }
-        } 
-        else {
-            System.out.println("Target Lost");
-            turnSpeed = 0;
-            withinTargetRange = true;
-        }
+        
         this.drivetrain.m_robotDrive.curvatureDrive(0, turnSpeed, true);
     }
 

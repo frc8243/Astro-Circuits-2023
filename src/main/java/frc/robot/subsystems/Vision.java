@@ -8,16 +8,25 @@ import org.photonvision.*;
 import org.photonvision.common.hardware.VisionLEDMode;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Vision extends SubsystemBase {
   /** Creates a new Limelight. */
-  public final static PhotonCamera limelight = new PhotonCamera("limelight");
-  public final static PhotonCamera frontCam = new PhotonCamera("frontCam"); 
-  public final static PhotonCamera armCam = new PhotonCamera("armCam"); 
+  public static PhotonCamera frontCam;
+  public static PhotonCamera armCam;
+  static NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  NetworkTableEntry tx = table.getEntry("tx");
+  NetworkTableEntry ty = table.getEntry("ty");
+  NetworkTableEntry ta = table.getEntry("ta");
 
   public Vision() {
-    limelight.setLED(VisionLEDMode.kOff);
+    frontCam = new PhotonCamera("frontCam");
+    armCam = new PhotonCamera("armCam");
+    System.out.println("Vision Init");
+    LLtoggleLights();
     armCam.setDriverMode(true);
     frontCam.setDriverMode(true);
     
@@ -26,19 +35,22 @@ public class Vision extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putBoolean("Vision/Limelight Connected",limelight.isConnected());
     SmartDashboard.putBoolean("Vision/RaspPi Connected",frontCam.isConnected());
-
+    double x = tx.getDouble(0.0);
+    double y = ty.getDouble(0.0);
+    double area = ta.getDouble(0.0);
+    SmartDashboard.putNumber("LimelightX", x);
+    SmartDashboard.putNumber("LimelightY", y);
+    SmartDashboard.putNumber("LimelightArea", area);
   }
 
   public static void LLtoggleLights() {
-    if (limelight.getLEDMode() == VisionLEDMode.kOn) {
-      limelight.setLED(VisionLEDMode.kOff);
+    if (table.getEntry("ledMode").getDouble(0.0) == 1.0) {
+      table.getEntry("ledMode").setNumber(3.0);
     }
-    else if (limelight.getLEDMode() == VisionLEDMode.kOff) {
-      limelight.setLED(VisionLEDMode.kOn);
+    else if (table.getEntry("ledMode").getDouble(0.0) == 3.0 || table.getEntry("ledMode").getDouble(0.0) == 0) {
+      table.getEntry("ledMode").setNumber(1.0);
     }
-  
   }
 
   public static void toggleDriverMode() {
