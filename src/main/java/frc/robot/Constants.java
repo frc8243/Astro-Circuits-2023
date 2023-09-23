@@ -15,7 +15,7 @@ public class Constants {
         ;
     }
 
-    // Assigns CAN IDs to buttons on Xbox Controller
+    // Assigns IDs to buttons on Xbox Controller
     public static final class XboxConstants {
         public static final int kLeftTrigger = 2;
         public static final int kRightTrigger = 3;
@@ -42,9 +42,9 @@ public class Constants {
         public static final double kGoalRangeMeters = Units.feetToMeters(1);
         public static final double kCameraPitchRadians = Units.degreesToRadians(0);
         public static final double kAngleToleranceDegrees = 5.0;
-        public static final double kTurningP = 0.035;
+        public static final double kTurningP = 1/56.;
         public static final double kTurningI = 0.0;
-        public static final double kTurningD = 0.01;
+        public static final double kTurningD = 0.0;
         public static final double kMovingP = -0.1;
         public static final double kMovingD = 0.0;
     }
@@ -82,7 +82,7 @@ public class Constants {
         public static final double kArmToFloor = Units.degreesToRadians(185);
         public static final double kFeedForward = 0.133;
         public static final double kArmTolerance = Units.degreesToRadians(2);
-        public static final double kArmManualSpeed = 0.5;
+        public static final double kArmManualSpeed = 0.25;
     }
 
     public static final class clawConstants 

@@ -5,8 +5,6 @@
 package frc.robot.subsystems;
 
 import org.photonvision.*;
-import org.photonvision.common.hardware.VisionLEDMode;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -18,9 +16,14 @@ public class Vision extends SubsystemBase {
   public static PhotonCamera frontCam;
   public static PhotonCamera armCam;
   static NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  NetworkTableEntry tv = table.getEntry("tv");
   NetworkTableEntry tx = table.getEntry("tx");
   NetworkTableEntry ty = table.getEntry("ty");
   NetworkTableEntry ta = table.getEntry("ta");
+  public static double targetFound;
+  public static double x;
+  public static double y;
+  public static double area;
 
   public Vision() {
     frontCam = new PhotonCamera("frontCam");
@@ -36,12 +39,14 @@ public class Vision extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putBoolean("Vision/RaspPi Connected",frontCam.isConnected());
-    double x = tx.getDouble(0.0);
-    double y = ty.getDouble(0.0);
-    double area = ta.getDouble(0.0);
-    SmartDashboard.putNumber("LimelightX", x);
-    SmartDashboard.putNumber("LimelightY", y);
-    SmartDashboard.putNumber("LimelightArea", area);
+    targetFound = tv.getDouble(0.0);
+    x = tx.getDouble(0.0);
+    y = ty.getDouble(0.0);
+    area = ta.getDouble(0.0);
+    SmartDashboard.putNumber("Vision/Target Found", targetFound);
+    SmartDashboard.putNumber("Vision/Target X Error", x);
+    SmartDashboard.putNumber("Vision/Target Y Error", y);
+    SmartDashboard.putNumber("Vision/Target Area", area);
   }
 
   public static void LLtoggleLights() {

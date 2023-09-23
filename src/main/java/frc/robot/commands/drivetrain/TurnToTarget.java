@@ -1,7 +1,6 @@
 package frc.robot.commands.drivetrain;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.VisionConstants;
 import frc.robot.subsystems.Drivetrain;
@@ -25,13 +24,22 @@ public class TurnToTarget extends CommandBase {
     public void initialize() {
         System.out.println("TurnToTarget Init");
         turnController = new PIDController(VisionConstants.kTurningP, VisionConstants.kTurningI, VisionConstants.kTurningD);
+        turnController.setTolerance(1);
         Vision.LLtoggleLights();
     }
 
     @Override
     public void execute() {
         // System.out.println(LocalTime.now()); Use this to find loop speed >: )
-        
+        if (Vision.targetFound == 1.0) {
+            turnSpeed = turnController.calculate(Vision.x, 0.0);
+        }
+        else {
+            System.out.println("Target not found");
+        }
+        if (Math.abs(turnSpeed) >= 0.2) {
+            turnSpeed = Math.copySign(0.2, turnSpeed);
+        }
         this.drivetrain.m_robotDrive.curvatureDrive(0, turnSpeed, true);
     }
 
