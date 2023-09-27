@@ -123,6 +123,9 @@ public class RobotContainer {
     // new JoystickButton(xboxController1, XboxConstants.kAButton).onTrue(
     //     new TurnToTarget(m_drivetrain));
 
+    new JoystickButton(xboxController1, XboxConstants.kAButton).onTrue(
+        new TurnToTarget(m_drivetrain));
+
     new JoystickButton(xboxController2, XboxConstants.kRightBumper).whileTrue(
         new SqueezyReleasy(m_claw, clawConstants.kClawSpeed));
 

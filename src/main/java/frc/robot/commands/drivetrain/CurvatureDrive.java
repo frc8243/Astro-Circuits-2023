@@ -16,7 +16,7 @@ public class CurvatureDrive extends CommandBase {
   private final Drivetrain drivetrain;
   private final Supplier<Double> forwardSpeed, turnSpeed;
   public static boolean isSlow = false;
-  public static boolean turnButton = false;
+  public static boolean turnButton = true;
   /** Creates a new CurvatureDrive. */
   public CurvatureDrive(Drivetrain Drivetrain, Supplier<Double> forwardSpeed, Supplier<Double> turnSpeed) {
     this.drivetrain = Drivetrain;
