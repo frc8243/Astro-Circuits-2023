@@ -24,7 +24,12 @@ public class Claw extends SubsystemBase {
     clawMotor.restoreFactoryDefaults();
     clawMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
   }
- 
+
+
+  /**
+   * Sets the speed of the motor attached to the claw.
+   * @param power Proportion of motor speed (-1 <-> 1);
+   */
   public void setMotor(double power){
     clawMotor.set(power);
   }

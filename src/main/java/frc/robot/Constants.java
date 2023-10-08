@@ -2,9 +2,9 @@ package frc.robot;
 //Imports
 import edu.wpi.first.math.util.Units;
 //EndImports
+
 public class Constants {
     
-    // Assigns CAN IDs to Motors
     public static final class DriveConstants {
         public static final int kRightFront = 2;
         public static final int kRightBack = 1;
