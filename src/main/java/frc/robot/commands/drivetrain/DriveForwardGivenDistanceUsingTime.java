@@ -11,11 +11,16 @@ import frc.robot.subsystems.Drivetrain;
 public class DriveForwardGivenDistanceUsingTime extends CommandBase {
 
   Timer timer;
-  static double SPEED = 2/3.;
+  static double speed = 2/3.;
   double time;
   Drivetrain m_driveTrain;
   double distance;
 
+  /**
+   * Moves the robot forwards or backwards based on the parameters using time.
+   * @param distance How far the robot should move
+   * @param subsystem Drivetrain to move
+   */
   public DriveForwardGivenDistanceUsingTime(double distance, Drivetrain subsystem) {
       // initial variables
       m_driveTrain = subsystem;
@@ -43,7 +48,7 @@ public class DriveForwardGivenDistanceUsingTime extends CommandBase {
   @Override
   public void execute() {
     //   m_driveTrain.setMotors(Math.copySign(SPEED, distance),Math.copySign(SPEED, distance));
-    this.m_driveTrain.m_robotDrive.curvatureDrive(Math.copySign(SPEED, distance), 0, false);
+    this.m_driveTrain.m_robotDrive.curvatureDrive(Math.copySign(speed, distance), 0, false);
 
       
 

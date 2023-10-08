@@ -29,7 +29,7 @@ public class Vision extends SubsystemBase {
     frontCam = new PhotonCamera("frontCam");
     armCam = new PhotonCamera("armCam");
     System.out.println("Vision Init");
-    LLtoggleLights();
+    setLights("off");
     armCam.setDriverMode(true);
     frontCam.setDriverMode(true);
     
@@ -38,7 +38,7 @@ public class Vision extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putBoolean("Vision/RaspPi Connected",frontCam.isConnected());
+    SmartDashboard.putBoolean("Vision/RaspPi Connected", frontCam.isConnected());
     targetFound = tv.getDouble(0.0);
     x = tx.getDouble(0.0);
     y = ty.getDouble(0.0);
@@ -49,12 +49,29 @@ public class Vision extends SubsystemBase {
     SmartDashboard.putNumber("Vision/Target Area", area);
   }
 
-  public static void LLtoggleLights() {
-    if (table.getEntry("ledMode").getDouble(0.0) == 1.0) {
-      table.getEntry("ledMode").setNumber(3.0);
+  /**
+   * Allows control of Limelight LEDs in Code.
+   * @param LEDStatus Can be "on" or "off" 
+   * @since 2023-10-03
+   * @author Julien 
+   *  
+   */
+  public static void setLights(String LEDStatus) {
+    // if (table.getEntry("ledMode").getDouble(0.0) == 1.0) {
+    //   table.getEntry("ledMode").setNumber(3.0);
+    // }
+    // else if (table.getEntry("ledMode").getDouble(0.0) == 3.0 || table.getEntry("ledMode").getDouble(0.0) == 0) {
+    //   table.getEntry("ledMode").setNumber(1.0);
+    // }
+    
+    if (LEDStatus == "on") {
+      table.getEntry("LedMode").setNumber(3.0);
     }
-    else if (table.getEntry("ledMode").getDouble(0.0) == 3.0 || table.getEntry("ledMode").getDouble(0.0) == 0) {
-      table.getEntry("ledMode").setNumber(1.0);
+    else if (LEDStatus == "off") {
+      table.getEntry("LedMode").setNumber(1.0);
+    }
+    else {
+      System.out.println("Vision.setLights() called with incorrect parameter");
     }
   }
 

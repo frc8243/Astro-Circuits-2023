@@ -25,7 +25,7 @@ public class TurnToTarget extends CommandBase {
         System.out.println("TurnToTarget Init");
         turnController = new PIDController(VisionConstants.kTurningP, VisionConstants.kTurningI, VisionConstants.kTurningD);
         turnController.setTolerance(1);
-        Vision.LLtoggleLights();
+        Vision.setLights("on");
     }
 
     @Override
@@ -52,7 +52,7 @@ public class TurnToTarget extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         this.drivetrain.m_robotDrive.curvatureDrive(0, 0, false);
-        Vision.LLtoggleLights();
+        Vision.setLights("off");
     }
 
 }
